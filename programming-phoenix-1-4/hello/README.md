@@ -16,3 +16,12 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## Notes
+
+### Building a feature
+Add a route and display content
+- edit router.ex
+- add a controller
+- add a view
+- add a template
