@@ -29,3 +29,12 @@
 .alert:empty {
   display: none;
 }
+.invalid-feedback {
+  color: #a94442;
+  display: block;
+
+  // input['text'] has a margin-bottom: 1.5 rem
+  // add same to bottom but remove some from top
+  margin-top: -1.0rem;
+  margin-bottom: 1.5rem;
+}

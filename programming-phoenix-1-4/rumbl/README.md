@@ -28,4 +28,15 @@ iex -S mix
 <pre>
 iex > c "lib/rumbl/accounts.ex"
 iex > r Accounts
+iex > recompile()
+</pre>
+
+- create migration script:
+<pre>
+mix ecto.gen.migration create_users
+</pre>
+
+- migrate:
+<pre>
+mix ecto.migrate
 </pre>
