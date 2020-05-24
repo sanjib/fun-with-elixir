@@ -23,14 +23,14 @@ be found at [https://hexdocs.pm/dictionary](https://hexdocs.pm/dictionary).
 
 ### mix
 
-```elixir
+```console
 mix run -e Dictionary.hello
 iex -S mix
 ```
 
 ### iex
 
-```elixir
+```console
 > Dictionary.hello
 > r Dictionary
 > c "lib/dictionary.ex"
@@ -41,7 +41,7 @@ iex -S mix
 
 ## Code Compare
 
-```elixir
+```console
 > IO.puts(length(String.split("1-2-3", "-")))
 3
 :ok
@@ -57,15 +57,16 @@ Use functions from the String module to:
 
 - Split it into two parts: the stuff before and the stuff after the comma.
 
-````elixir
+```console
 > str = "had we but world enough, and time"
 > String.split(str, ~r/,/)
 ["had we but world enough", " and time"]
-```elixir
+
+```
 
 - Split it into a list of characters, where each entry in the list is a single character string.
 
-```elixir
+```console
 > String.split(str, ~r//)
 ["", "h", "a", "d", " ", "w", "e", " ", "b", "u", "t", " ", "w", "o", "r", "l",
  "d", " ", "e", "n", "o", "u", "g", "h", ",", " ", "a", "n", "d", " ", "t", "i",
@@ -78,11 +79,11 @@ Use functions from the String module to:
 ["h", "a", "d", " ", "w", "e", " ", "b", "u", "t", " ", "w", "o", "r", "l", "d",
  " ", "e", "n", "o", "u", "g", "h", ",", " ", "a", "n", "d", " ", "t", "i", "m",
  "e"]
-````
+```
 
 - Split it into a list of characters, where each entry in the list is the integer representation of that character.
 
-```elixir
+```console
 > str3 = str <> "á"
 "had we but world enough, and timeá"
 > String.to_charlist(str3)
@@ -95,14 +96,14 @@ ignore the last result above 225 as it represents "á"
 
 - reverse the string (hmmm… the first two words of the result are interesting)
 
-```elixir
+```console
 > String.reverse(str)
 "emit dna ,hguone dlrow tub ew dah"
 ```
 
 - calculate the set of differences between this string and "had we but bacon enough, and treacle"; you should get
 
-```elixir
+```console
 [
   eq: "had we but ", del: "w", ins: "bac", eq: "o",
   del: "rld", ins: "n", eq: " enough, and t", del: "im",
@@ -110,7 +111,7 @@ ignore the last result above 225 as it represents "á"
 ]
 ```
 
-```elixir
+```console
 > String.myers_difference(str, str2)
 [
   eq: "had we but ",
