@@ -16,6 +16,7 @@ Personal study notes and code for the course by Dave Thomas [Elixir for Programm
 
 - [Installing Elixir](https://elixir-lang.org/install.html)
 - [Package manager Hex](https://hex.pm/), install `mix local.hex`
+- [mix deps](https://hexdocs.pm/mix/Mix.Tasks.Deps.html)
 
 ## Quotes
 
@@ -23,6 +24,7 @@ Personal study notes and code for the course by Dave Thomas [Elixir for Programm
 - Composition means chaining together functions so that the output of one becomes the input of the next.
 - Pattern matching lets you write different versions of the same function. This is similar to the idea of overloaded methods in some OO languages.
 - When you're just starting out with Elixir, try to make yourself use pipelines all the time. A good way to remind yourself is to try not to use local variables. You won't always succeed—sometimes you just need to use them. But thinking about eliminating them will help you think in terms of transformations and pipelines.
+- If you can envisage the code you’re about to write being a component in something else, make it into a separate application.
 
 ## Notes
 
@@ -62,6 +64,8 @@ mix run -e [mod].[fun]  # run mod.fun
 mix help                # help
 mix help run            # help for mix run
 iex -S mix              # starts iex & runs default task
+mix deps.get            # fetch deps
+mix hex.search <package> # search for packages in hex.pm
 ```
 
 ### Elixir Types
@@ -455,4 +459,17 @@ iex> Enum.map [1, 2, 3], fn x -> x*2 end
 [2, 4, 6]
 iex> Enum.map [1, 2, 3], &(&1*2)
 [2, 4, 6]
+```
+
+### mix deps
+
+```elixir
+def deps() do
+  [
+    {:dictionary, path: "../dictionary" },  # local
+    {:pusher, github: "pragdave/pusher" },  # github
+    {:earmark, "~> 1.0.0" }, # hex.pm
+    {:x, "~> 1.2.3"} # matches 1.2.3, 1.2.4, 1.2.11, but not 1.3.0
+  ]
+end
 ```
