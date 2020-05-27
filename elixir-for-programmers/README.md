@@ -66,6 +66,7 @@ mix help run            # help for mix run
 iex -S mix              # starts iex & runs default task
 mix deps.get            # fetch deps
 mix hex.search <package> # search for packages in hex.pm
+mix test                # run tests
 ```
 
 ### Elixir Types
@@ -473,3 +474,7 @@ def deps() do
   ]
 end
 ```
+
+### Testing
+
+> you can call test source files anything you want, as long as the name ends \_test.exs
