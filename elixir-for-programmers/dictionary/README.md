@@ -2,23 +2,6 @@
 
 The dictionary module.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `dictionary` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:dictionary, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/dictionary](https://hexdocs.pm/dictionary).
-
 ## Notes
 
 ### mix
@@ -130,4 +113,21 @@ ignore the last result above 225 as it represents "á"
   eq: "e",
   ins: "acle"
 ]
+```
+
+## Steps to make a library into an application
+
+```elixir
+# mix.exs
+def application do
+  [
+    mod: {Dictionary.Application, []},
+    extra_applications: [:logger]
+  ]
+end
+
+# application.ex
+def start(_type, _args) do
+  Dictionary.WordList.start_link()
+end
 ```
