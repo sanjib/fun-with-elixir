@@ -1,0 +1,2 @@
+defmodule Scratch do
+end
