@@ -25,6 +25,7 @@ Personal study notes and code for the course by Dave Thomas [Elixir for Programm
 - Pattern matching lets you write different versions of the same function. This is similar to the idea of overloaded methods in some OO languages.
 - When you're just starting out with Elixir, try to make yourself use pipelines all the time. A good way to remind yourself is to try not to use local variables. You won't always succeed—sometimes you just need to use them. But thinking about eliminating them will help you think in terms of transformations and pipelines.
 - If you can envisage the code you’re about to write being a component in something else, make it into a separate application.
+- Never connect nodes over unencrypted networks, anyone can listen.
 
 ## Notes
 
