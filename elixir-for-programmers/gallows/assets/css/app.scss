@@ -1,5 +1,14 @@
 /* This file is for your main application css. */
-@import "./phoenix.css";
+@import './phoenix.css';
+
+body {
+  background-color: #caaad1;
+}
+
+header {
+  background-color: transparent;
+  border-bottom: transparent;
+}
 
 /* Alerts and form errors */
 .alert {
