@@ -1,0 +1,8 @@
+<%= game_state(@tally.game_state) %>
+
+<aside class="hangman-gallows">
+  <%= render "_gallows.html", left: @tally.turns_left %>
+</aside>
+<section class="hangman-status">
+  <%= render "_status.html", tally: @tally, conn: @conn %>
+</section>

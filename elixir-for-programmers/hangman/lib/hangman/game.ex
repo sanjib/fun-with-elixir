@@ -33,7 +33,8 @@ defmodule Hangman.Game do
       game_state: game.game_state,
       turns_left: game.turns_left,
       letters: game.letters |> reveal_guessed(game.used),
-      used: game.used
+      used: game.used,
+      word: game.letters |> Enum.join("")
     }
   end
 

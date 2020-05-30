@@ -1,5 +1,5 @@
 /* This file is for your main application css. */
-@import "./phoenix.css";
+@import './phoenix.css';
 
 /* Alerts and form errors */
 .alert {
@@ -23,9 +23,29 @@
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+.alert-success {
+  color: green;
+  background-color: lightgreen;
+  border-color: darkgreen;
+}
 .alert p {
   margin-bottom: 0;
 }
 .alert:empty {
   display: none;
+}
+
+.danger {
+  color: #a94442;
+}
+
+.hangman-gallows {
+  float: left;
+  width: 30%;
+  margin-right: 5%;
+}
+
+.hangman-status {
+  float: left;
+  width: 65%;
 }
