@@ -15,4 +15,11 @@ mix test                # run tests
 mix clean
 mix compile
 mix do clean, compile
+mix archive             # list installed archives
+mix phx.new [prj] --no-ecto # install new phoenix project without ecto database mappying layer
+```
+
+Examples:
+```console
+mix phx.new gallows --no-ecto
 ```

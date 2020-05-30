@@ -1,0 +1,11 @@
+<section class="phx-hero">
+  xxx
+</section>
+
+<h2><%= #raise "error" %></h2>
+
+<ul>
+  <li>My master has <%= plural_of("egg", 1) %></li>
+  <li>The dame has <%= plural_of("egg", 2) %></li>
+  <li>I have <%= plural_of("egg", -1) %></li>
+</ul>
