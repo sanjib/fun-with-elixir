@@ -1,0 +1,17 @@
+## Chapter 1 
+
+> - Object orientation is not the only way to design code.
+> - Functional programming need not be complex or mathematical.
+> - The bases of programming are not assignments, if statements, and loops.
+> - Concurrency does not need locks, semaphores, monitors, and the like.
+> - Processes are not necessarily expensive resources.
+> - Metaprogramming is not just something tacked onto a language.
+> - Even if it is work, programming should be fun.
+
+## Chapter 2
+
+> - In Elixir, the equals sign is not an assignment. Instead it’s like an assertion.
+> - Joe Armstrong, Erlang’s creator, compares the equals sign in Erlang to that
+used in algebra. When you write the equation x = a + 1, you are not assigning
+the value of a + 1 to x. Instead you’re simply asserting that the expressions
+x and a + 1 have the same value.

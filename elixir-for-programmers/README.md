@@ -30,6 +30,7 @@ Personal study notes and code for the course by Dave Thomas [Elixir for Programm
 - Getting familiar with where things live in Phoenix is one if the keys to productivity, and that familiarity comes from practice.
 - I like Elixir and Phoenix because they let me write in this style. I can write clear, maintainable, and performant code, where every function represents a clear transformation of state.
 - Use partial templates to break large templates into more manageable chunks. In particular, I like to arrange things so that all the code in a template is at roughly the same level, and that it doesn’t get deeper that about three levels of nesting.
+- A thread that runs through this course is the idea of designing for decoupling using the Single Responsibility Principle. As we've seen, this applies equally to individual functions, to complete modules, and to entire applications.
 
 ## Notes
 
