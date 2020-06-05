@@ -15,3 +15,9 @@
 used in algebra. When you write the equation x = a + 1, you are not assigning
 the value of a + 1 to x. Instead you’re simply asserting that the expressions
 x and a + 1 have the same value.
+
+## Chapter 15
+
+> - We ran a million processes (sequentially) in just over 5 seconds.
+> - This kind of performance is stunning, and it changes the way we design code. We can now create hundreds of little helper processes.
+> - And each process can contain its own state—in a way, processes in Elixir are like objects in an object-oriented system (but they’re more self-contained).
