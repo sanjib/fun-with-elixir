@@ -9,3 +9,13 @@ iex(35)> id
 "1"
 ```
 
+```console
+import Servy.Plugins, only: [rewrite_path: 1, log: 1, track: 1]
+import Servy.Parser, only: [parse: 1]
+
+import SomeModule, only: :functions
+import SomeModule, only: :macros
+
+@pages_path Path.expand("../../pages", __DIR__)
+@pages_path Path.expand("pages", File.cwd!)
+```
