@@ -30,6 +30,10 @@ defmodule Servy.Handler do
     %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
   end
 
+  def route(conv = %Conv{method: "POST", path: "/bears"}) do
+    %{conv | status: 201, resp_body: "Create a #{conv.params["type"]} bear named #{conv.params["name"]}!"}
+  end
+
   def route(conv = %Conv{method: "GET", path: "/bears/new"}) do
     FileHandler.file_read(@form_file_path, conv)
   end
@@ -218,6 +222,20 @@ Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
 
+"""
+response = Servy.Handler.handle(request)
+IO.puts(response)
+
+
+request = """
+POST /bears HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 21
+
+name=Baloo&type=Brown
 """
 response = Servy.Handler.handle(request)
 IO.puts(response)
