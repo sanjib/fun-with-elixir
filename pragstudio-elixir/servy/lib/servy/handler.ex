@@ -239,4 +239,3 @@ name=Baloo&type=Brown
 """
 response = Servy.Handler.handle(request)
 IO.puts(response)
-
