@@ -3,6 +3,7 @@
 - [Recursion](./recursion.md)
 - [Capturing Expressions](./capturing_expressions.md)
 - [Capture Functions](./capture_functions.md)
+- [Comprehensions](./comprehensions.md)
 
 ## Bookmarks
 

@@ -19,3 +19,11 @@ import SomeModule, only: :macros
 @pages_path Path.expand("../../pages", __DIR__)
 @pages_path Path.expand("pages", File.cwd!)
 ```
+
+## Quotes
+
+```console
+<%= inspect(bears) %>
+```
+
+> - Calling the inspect function is fundamentally different from calling the IO.inspect function. Calling inspect returns a string representing its argument whereas calling IO.inspect inspects its argument and writes the result to a device such as the console. So in a template file, you always want to use inspect.

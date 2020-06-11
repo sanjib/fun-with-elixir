@@ -86,6 +86,7 @@ end
 
 # --------------------
 
+# GET /wildthings
 request = """
 GET /wildthings HTTP/1.1
 Host: example.com
@@ -97,6 +98,7 @@ Accept: */*
 #IO.puts(response)
 
 
+# GET /bears
 request = """
 GET /bears HTTP/1.1
 Host: example.com
@@ -104,10 +106,11 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-#response = Servy.Handler.handle(request)
-#IO.puts(response)
+response = Servy.Handler.handle(request)
+IO.puts(response)
 
 
+# GET /bigfoot
 request = """
 GET /bigfoot HTTP/1.1
 Host: example.com
@@ -127,8 +130,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-#response = Servy.Handler.handle(request)
-#IO.puts(response)
+response = Servy.Handler.handle(request)
+IO.puts(response)
 
 
 # DELETE /bears/1
@@ -243,5 +246,6 @@ Content-Length: 21
 
 name=Baloo&type=Brown
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
+
