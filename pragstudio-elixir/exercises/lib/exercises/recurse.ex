@@ -1,4 +1,7 @@
 defmodule Exercises.Recurse do
+
+  # -- sum
+
   def sum(list), do: sum(list, 0)
 
   def sum([head | tail], acc) do
@@ -8,7 +11,7 @@ defmodule Exercises.Recurse do
 
   def sum([], acc), do: acc
 
-  # --
+  # -- triple
 
   def triple([head | tail]) do
     [head * 3 | triple(tail)]
@@ -16,7 +19,7 @@ defmodule Exercises.Recurse do
 
   def triple([]), do: []
 
-  # -- tco: tail call optimized
+  # -- triple_tco: tail call optimized
 
   def triple_tco(list), do: triple_tco(list, [])
 
@@ -26,4 +29,16 @@ defmodule Exercises.Recurse do
   end
 
   def triple_tco([], acc), do: Enum.reverse acc
+
+  # -- my_map
+
+  def my_map(list, fun), do: my_map(list, fun, [])
+
+  def my_map([], _fun, list), do: Enum.reverse(list)
+
+  def my_map([head | tail], fun, list) do
+    list = [fun.(head) | list]
+    my_map(tail, fun, list)
+  end
+
 end

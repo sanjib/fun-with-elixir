@@ -16,6 +16,9 @@ used in algebra. When you write the equation x = a + 1, you are not assigning
 the value of a + 1 to x. Instead you’re simply asserting that the expressions
 x and a + 1 have the same value.
 
+## Chapter 3
+> - But the cool thing about Elixir is that you write your code using lots and lots of processes, and each process has its own heap.
+
 ## Chapter 15
 
 > - We ran a million processes (sequentially) in just over 5 seconds.

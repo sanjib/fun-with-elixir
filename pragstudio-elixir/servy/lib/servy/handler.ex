@@ -7,6 +7,7 @@ defmodule Servy.Handler do
   alias Servy.Parser
   alias Servy.FileHandler
   alias Servy.Conv
+  alias Servy.BearController
 
   @doc "Transforms the request into a response."
   def handle(request) do
@@ -14,7 +15,7 @@ defmodule Servy.Handler do
     |> Parser.parse
     |> Plugins.log
     |> Plugins.rewrite_path
-    |> Plugins.log
+#    |> Plugins.log
     |> route
     |> Plugins.track
     |> emojify
@@ -27,11 +28,11 @@ defmodule Servy.Handler do
   end
 
   def route(conv = %Conv{method: "GET", path: "/bears"}) do
-    %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+    BearController.index(conv)
   end
 
   def route(conv = %Conv{method: "POST", path: "/bears"}) do
-    %{conv | status: 201, resp_body: "Create a #{conv.params["type"]} bear named #{conv.params["name"]}!"}
+    BearController.create(conv, conv.params)
   end
 
   def route(conv = %Conv{method: "GET", path: "/bears/new"}) do
@@ -39,11 +40,12 @@ defmodule Servy.Handler do
   end
 
   def route(conv = %Conv{method: "GET", path: "/bears/" <> id}) do
-    %{conv | status: 200, resp_body: "Bear #{id}"}
+    params = Map.put(conv.params, "id", id)
+    BearController.show(conv, params)
   end
 
-  def route(conv = %Conv{method: "DELETE", path: "/bears/" <> _id}) do
-    %{conv | status: 403, resp_body: "Deleting a bear is forbidden!"}
+  def route(conv = %Conv{method: "DELETE", path: "/bears/" <> id}) do
+    BearController.delete(conv, conv.params)
   end
 
   def route(conv = %Conv{method: "GET", path: "/about"}) do
@@ -91,8 +93,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -102,8 +104,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -113,10 +115,11 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
+# GET /bears/1
 request = """
 GET /bears/1 HTTP/1.1
 Host: example.com
@@ -124,10 +127,11 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
+# DELETE /bears/1
 request = """
 DELETE /bears/1 HTTP/1.1
 Host: example.com
@@ -135,10 +139,11 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
+# GET /wildlife
 request = """
 GET /wildlife HTTP/1.1
 Host: example.com
@@ -146,10 +151,11 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
+# GET /bears?id=1
 request = """
 GET /bears?id=1 HTTP/1.1
 Host: example.com
@@ -157,19 +163,19 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
 GET /about HTTP/1.1
-Host: example.com
+#Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -179,8 +185,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -190,8 +196,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -201,8 +207,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -212,8 +218,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """
@@ -223,8 +229,8 @@ User-Agent: ExampleBrowser/1.0
 Accept: */*
 
 """
-response = Servy.Handler.handle(request)
-IO.puts(response)
+#response = Servy.Handler.handle(request)
+#IO.puts(response)
 
 
 request = """

@@ -1,24 +1,23 @@
 # Exercises
 
-## Recursion
+- [Recursion](./recursion.md)
+- [Capturing Expressions](./capturing_expressions.md)
+- [Capture Functions](./capture_functions.md)
 
-- Sum The Numbers
+## Bookmarks
 
-```console
-iex(1)> Exercises.Recurse.sum([1, 2, 3, 4, 5])
-15
-```
+https://hexdocs.pm/elixir/patterns-and-guards.html#list-of-allowed-functions-and-operators
 
-- Triple All The Numbers
-
-```console
-iex(2)> Exercises.Recurse.triple([1, 2, 3, 4, 5])
-[3, 6, 9, 12, 15]
-```
-
-- Tail-Call Optimization
+## Just for Fun
 
 ```console
-iex(3)> Exercises.Recurse.triple_tco([1, 2, 3, 4, 5]) 
-[3, 6, 9, 12, 15]
+iex> Enum.sum(1..10)    
+55
+iex> Enum.sum(1..100)   
+5050
+iex> Enum.sum(1..1_000)
+500500
+iex> Enum.sum(1..10_000)
+50005000
 ```
+
