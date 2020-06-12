@@ -22,15 +22,23 @@ defmodule Servy.Plugins do
   def rewrite_path_captures(%Conv{} = conv, nil), do: conv
 
   @doc "Logs conv (conversation). Currently used before and after rewrite_path."
-  def log(%Conv{} = conv), do: IO.inspect(conv)
+  def log(%Conv{} = conv) do
+    if Mix.env == :dev do
+      IO.inspect(conv)
+    end
+    conv
+  end
 
   @doc "Logs 404 requests"
   def track(conv = %{status: 404, path: path}) do
-    Logger.info "--> It's lunchtime somewhere."
-    Logger.warn "--> Do we have a problem, Houston?"
-    Logger.error "--> Danger Will Robinson!"
-
-    IO.puts "Warning: #{path} is on the loose!"
+    if Mix.env == :dev do
+      Logger.info "--> It's lunchtime somewhere."
+      Logger.warn "--> Do we have a problem, Houston?"
+      Logger.error "--> Danger Will Robinson!"
+    end
+    if Mix.env != :test do
+      IO.puts "Warning: #{path} is on the loose!"
+    end
     conv
   end
 
