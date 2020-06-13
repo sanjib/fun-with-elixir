@@ -1,21 +1,12 @@
 # Servy
 
-**TODO: Add description**
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `servy` to your list of dependencies in `mix.exs`:
+Some notable code, note the Poison.decode function param "as:".
+Converts a regular map inside a list to a struct %Bear.
 
 ```elixir
-def deps do
-  [
-    {:servy, "~> 0.1.0"}
-  ]
-end
+Path.absname("../../db", __DIR__)
+|> Path.join("bears.json")
+|> File.read!
+|> Poison.decode!(as: %{"bears" => [%Bear{}]})
+|> Map.get("bears")
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/servy](https://hexdocs.pm/servy).
-

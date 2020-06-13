@@ -2,6 +2,7 @@ defmodule Servy.Handler do
   @moduledoc "Handles HTTP requests."
   @about_file_path "../../pages/about.html"
   @form_file_path "../../pages/form.html"
+  @faq_bigfoot_file_path "../../pages/faq-bigfoot.md"
 
   alias Servy.Plugins
   alias Servy.Parser
@@ -19,10 +20,20 @@ defmodule Servy.Handler do
     |> route
     |> Plugins.track
 #    |> emojify
+    |> Servy.Conv.put_content_length
     |> format_response
   end
 
   @doc ""
+
+  def route(conv = %Conv{method: "GET", path: "/api/bears"}) do
+    Servy.Api.BearController.index(conv)
+  end
+
+  def route(conv = %Conv{method: "POST", path: "/api/bears"}) do
+    Servy.Api.BearController.create(conv, conv.params)
+  end
+
   def route(conv = %Conv{method: "GET", path: "/wildthings"}) do
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
@@ -52,6 +63,12 @@ defmodule Servy.Handler do
     FileHandler.file_read(@about_file_path, conv)
   end
 
+  def route(conv = %Conv{method: "GET", path: "/faq-bigfoot"}) do
+    conv = FileHandler.file_read(@faq_bigfoot_file_path, conv)
+    resp_body = Earmark.as_html!(conv.resp_body)
+    %{conv | resp_body: resp_body}
+  end
+
   def route(conv = %Conv{method: "GET", path: "/pages/" <> page_name}) do
     FileHandler.file_read("../../pages/#{page_name}.html", conv)
   end
@@ -73,10 +90,27 @@ defmodule Servy.Handler do
   def emojify(%Conv{} = conv), do: conv
 
   def format_response(%Conv{} = conv) do
+#    """
+#    HTTP/1.1 #{Conv.full_status(conv)}\r
+#    Content-Type: #{conv.resp_content_type}\r
+#    Content-Length: #{byte_size(conv.resp_body)}\r
+#    \r
+#    #{conv.resp_body}
+#    """
+
+#    IO.inspect(Servy.Conv.format_response_headers(conv))
+
+#    """
+#    HTTP/1.1 #{Conv.full_status(conv)}\r
+#    Content-Type: #{conv.resp_headers["Content-Type"]}\r
+#    Content-Length: #{conv.resp_headers["Content-Length"]}\r
+#    \r
+#    #{conv.resp_body}
+#    """
+
     """
     HTTP/1.1 #{Conv.full_status(conv)}\r
-    Content-Type: text/html\r
-    Content-Length: #{byte_size(conv.resp_body)}\r
+    #{Servy.Conv.format_response_headers(conv)}
     \r
     #{conv.resp_body}
     """
