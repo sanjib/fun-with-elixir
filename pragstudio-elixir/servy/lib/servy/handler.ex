@@ -14,7 +14,7 @@ defmodule Servy.Handler do
   def handle(request) do
     request
     |> Parser.parse
-    |> Plugins.log
+#    |> Plugins.log
     |> Plugins.rewrite_path
 #    |> Plugins.log
     |> route
@@ -34,11 +34,28 @@ defmodule Servy.Handler do
     Servy.Api.BearController.create(conv, conv.params)
   end
 
+  def route(%Conv{ method: "GET", path: "/kaboom" } = conv) do
+    raise "Kaboom!"
+  end
+
+  def route(%Conv{ method: "GET", path: "/hibernate/" } = conv) do
+    %{ conv | status: 200, resp_body: "Awake!" }
+  end
+
+  def route(%Conv{ method: "GET", path: "/hibernate/" <> time } = conv) do
+    time |> String.to_integer |> :timer.sleep
+    %{ conv | status: 200, resp_body: "Awake!" }
+  end
+
   def route(conv = %Conv{method: "GET", path: "/wildthings"}) do
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
 
   def route(conv = %Conv{method: "GET", path: "/bears"}) do
+    BearController.index(conv)
+  end
+
+  def route(conv = %Conv{method: "GET", path: "/bears/"}) do
     BearController.index(conv)
   end
 
