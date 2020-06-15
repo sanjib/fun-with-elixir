@@ -2,5 +2,5 @@
 
 <p>
     Is <%= bear.name %> hibernating?
-    <strong><%= bear.hibernating %>.</strong>
+    <strong><%= bear.hibernating %></strong>
 </p>

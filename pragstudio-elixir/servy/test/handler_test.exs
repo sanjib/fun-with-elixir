@@ -92,7 +92,7 @@ defmodule HandlerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 71\r
+    Content-Length: 80\r
     \r
     <h1>Show Bear</h1>
     <p>

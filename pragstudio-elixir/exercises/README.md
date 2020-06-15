@@ -1,9 +1,14 @@
 # Exercises
 
-- [Recursion](./recursion.md)
-- [Capturing Expressions](./capturing_expressions.md)
 - [Capture Functions](./capture_functions.md)
+- [Capturing Expressions](./capturing_expressions.md)
 - [Comprehensions](./comprehensions.md)
+- [Concurrent, Isolated Processes](./concurrent_isolated_processes.md)
+- [Elixir](./elixir.md)
+- [Implementing Map](./implement_map.md)
+- [Process & System](process_and_system.md)
+- [Recursion](./recursion.md)
+- [Timer](./timer.md)
 
 ## Bookmarks
 
