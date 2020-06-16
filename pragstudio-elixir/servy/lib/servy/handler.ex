@@ -9,6 +9,7 @@ defmodule Servy.Handler do
   alias Servy.FileHandler
   alias Servy.Conv
   alias Servy.BearController
+  alias Servy.VideoCam
 
   @doc "Transforms the request into a response."
   def handle(request) do
@@ -28,6 +29,32 @@ defmodule Servy.Handler do
 
   def route(conv = %Conv{method: "GET", path: "/api/bears"}) do
     Servy.Api.BearController.index(conv)
+  end
+
+  def route(conv = %Conv{method: "GET", path: "/api/snapshots"}) do
+    parent = self()
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-1")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-2")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-3")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-4")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-5")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-6")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-7")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-8")}) end)
+    spawn(fn -> send(parent, {:response, VideoCam.get_snapshot("cam-9")}) end)
+
+    snap1 = receive do {:response, filename} -> filename end
+    snap2 = receive do {:response, filename} -> filename end
+    snap3 = receive do {:response, filename} -> filename end
+    snap4 = receive do {:response, filename} -> filename end
+    snap5 = receive do {:response, filename} -> filename end
+    snap6 = receive do {:response, filename} -> filename end
+    snap7 = receive do {:response, filename} -> filename end
+    snap8 = receive do {:response, filename} -> filename end
+    snap9 = receive do {:response, filename} -> filename end
+
+    snapshots = [snap1, snap2, snap3, snap4, snap5, snap6, snap7, snap8, snap9]
+    %{conv | status: 200, resp_body: inspect snapshots}
   end
 
   def route(conv = %Conv{method: "POST", path: "/api/bears"}) do
