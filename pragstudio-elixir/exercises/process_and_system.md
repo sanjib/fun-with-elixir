@@ -1,5 +1,7 @@
 # Process & System
 
+Listing process:
+
 ```console
 iex> Process.list
 [#PID<0.0.0>, #PID<0.1.0>, #PID<0.2.0>, #PID<0.3.0>, #PID<0.4.0>, #PID<0.5.0>,
@@ -17,6 +19,8 @@ iex> IO.puts "#{inspect self()}"
 :ok
 ```
 
+Counting process:
+
 ```console
 iex> Process.list |> Enum.count
 54
@@ -24,5 +28,22 @@ iex> :erlang.system_info(:process_count)
 54
 iex> :erlang.system_info(:process_limit)
 262144
+```
+
+Sending message to process:
+
+```console
+iex> parent = self()
+#PID<0.178.0>
+iex> pid1 = spawn(fn -> send(parent, {:result, "some message foo 1"}) end)                
+#PID<0.10542.1>
+iex> Process.info(parent, :messages)
+{:messages, [result: "some message foo 1"]}
+iex> receive do
+...> {:result, msg} -> msg
+...> end
+"some message foo 1"
+iex> Process.info(parent, :messages)
+{:messages, []}
 ```
 
