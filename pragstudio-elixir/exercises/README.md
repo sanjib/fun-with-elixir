@@ -8,6 +8,7 @@
 - [Implementing Map](./implement_map.md)
 - [Process & System](process_and_system.md)
 - [Recursion](./recursion.md)
+- [Task](./task.md)
 - [Timer](./timer.md)
 
 ## Bookmarks

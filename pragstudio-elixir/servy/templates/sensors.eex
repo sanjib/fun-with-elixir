@@ -1,0 +1,12 @@
+<h1>Sensors</h1>
+
+<ul>
+<%= for item <- data do %>
+  <li>
+    <strong><%= item.name %></strong>
+    found at <%= item.lat %>, <%= item.lng %>,
+    process slept for <%= item.sleep_for %>
+  </li>
+<% end %>
+</ul>
+

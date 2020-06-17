@@ -16,8 +16,13 @@ defmodule Servy.Conv do
   end
 
   def put_content_length(conv) do
-    content_length = String.length(conv.resp_body)
-#    content_length = byte_size(conv.resp_body)
+    # Never use String.length, always use byte_size
+    # Why? We need the actual byte length for special characters
+    # otherwise the browser will only render up to length which
+    # may be shorter than what needs to be rendered
+#    content_length = String.length(conv.resp_body)
+
+    content_length = byte_size(conv.resp_body)
     resp_headers = Map.put(conv.resp_headers, "Content-Length", content_length)
     %{conv | resp_headers: resp_headers}
   end

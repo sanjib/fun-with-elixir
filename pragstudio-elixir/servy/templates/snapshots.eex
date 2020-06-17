@@ -1,0 +1,9 @@
+<h1>Snapshots</h1>
+
+<p>Total records: <%= length(snapshots) %></p>
+
+<ul>
+<%= for {image, i} <- Enum.with_index(snapshots) do %>
+  <li><%= i %>. <%= image %></li>
+<% end %>
+</ul>

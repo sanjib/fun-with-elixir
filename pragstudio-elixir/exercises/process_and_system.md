@@ -47,3 +47,26 @@ iex> Process.info(parent, :messages)
 {:messages, []}
 ```
 
+Flush:
+
+```console
+iex> parent = self()
+#PID<0.178.0>
+iex> spawn(fn -> send(parent, "yes") end)
+#PID<0.26733.5>
+iex> spawn(fn -> send(parent, "no") end) 
+#PID<0.26904.5>
+iex> spawn(fn -> send(parent, "maybe") end)
+#PID<0.27107.5>
+iex> Process.info(parent, :messages)
+{:messages, ["yes", "no", "maybe"]}
+iex> flush
+"yes"
+"no"
+"maybe"
+:ok
+iex> Process.info(parent, :messages)
+{:messages, []}
+iex> flush                          
+:ok
+```

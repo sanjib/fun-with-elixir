@@ -5,6 +5,7 @@ defmodule Servy.VideoCam do
     :timer.sleep(1000)
 
     # dummy response
+#    "#{camera_name}-snapshot.jpg"
     "#{camera_name}-snapshot.jpg"
   end
 end

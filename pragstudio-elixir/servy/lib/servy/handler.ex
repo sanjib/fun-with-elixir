@@ -10,6 +10,9 @@ defmodule Servy.Handler do
   alias Servy.Conv
   alias Servy.BearController
   alias Servy.VideoCam
+  alias Servy.Fetcher
+#  alias Servy.View
+  import Servy.View, only: [render: 3]
 
   @doc "Transforms the request into a response."
   def handle(request) do
@@ -31,27 +34,49 @@ defmodule Servy.Handler do
     Servy.Api.BearController.index(conv)
   end
 
+  def route(conv = %Conv{method: "GET", path: "/api/sensors"}) do
+
+#    locations =
+#      ["bigfoot", "roscoe", "brutus", "smokey"]
+#      |> Enum.map(&Fetcher.async(fn -> Servy.Tracker.get_location(&1) end))
+#      |> Enum.map(&Fetcher.get_result/1)
+
+    data =
+      ["bigfoot", "roscoe", "brutus", "smokey"]
+#      |> Enum.map(&Task.async(fn -> Servy.Tracker.get_location(&1) end))
+      |> Enum.map(&Task.async(Servy.Tracker, :get_location, [&1]))
+      |> Enum.map(&Task.await/1)
+
+#    %{conv |
+#        status: 200,
+##        resp_body: inspect(locations, limit: :infinity)
+#    }
+
+    render(conv, "sensors.eex", data: data)
+  end
+
   def route(conv = %Conv{method: "GET", path: "/api/snapshots"}) do
-    parent = self()
 
-    # spawn 1000 process
-    Enum.each(1..1000, fn num ->
-      spawn(fn -> send(parent, {:result, VideoCam.get_snapshot("cam-#{num}")}) end)
+    # spawn 10,000 process
+    Enum.each(1..10_000, fn num ->
+      Fetcher.async(fn -> VideoCam.get_snapshot("cam-#{num}") end)
     end)
 
-    # receive message from the 1000 process
-    snapshots = Enum.map(1..1000, fn num ->
-      receive do {:result, filename} -> filename end
+    # receive message from the 10,000 process
+    snapshots = Enum.map(1..10_000, fn _ ->
+      Fetcher.get_result()
     end)
 
-    %{conv | status: 200, resp_body: inspect(snapshots, limit: :infinity)}
+#    %{conv | status: 200, resp_body: inspect(snapshots, limit: :infinity)}
+
+    render(conv, "snapshots.eex", snapshots: snapshots)
   end
 
   def route(conv = %Conv{method: "POST", path: "/api/bears"}) do
     Servy.Api.BearController.create(conv, conv.params)
   end
 
-  def route(%Conv{ method: "GET", path: "/kaboom" } = conv) do
+  def route(%Conv{ method: "GET", path: "/kaboom" } = _conv) do
     raise "Kaboom!"
   end
 
