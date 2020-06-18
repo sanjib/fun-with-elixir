@@ -1,0 +1,20 @@
+<h1>404s</h1>
+
+<table>
+<thead>
+    <tr>
+        <th>Nr.</th>
+        <th>Path</th>
+        <th>Count</th>
+    </tr>
+</thead>
+<tbody>
+    <%= for {{path, count}, index} <- Enum.with_index(four04s) do %>
+    <tr>
+        <td><%= index %></td>
+        <td><%= path %></td>
+        <td><%= count %></td>
+    </tr>
+    <% end %>
+</tbody>
+</table>

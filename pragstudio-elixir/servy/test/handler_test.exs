@@ -37,7 +37,7 @@ defmodule HandlerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 418\r
+    Content-Length: 444\r
     \r
     <h1>All the Bears</h1>
 
@@ -92,7 +92,7 @@ defmodule HandlerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 80\r
+    Content-Length: 85\r
     \r
     <h1>Show Bear</h1>
     <p>
@@ -137,7 +137,7 @@ defmodule HandlerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 486\r
+    Content-Length: 498\r
     \r
     <h1>About Wo and Shade</h1>
 
@@ -268,7 +268,7 @@ defmodule HandlerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 798\r
+    Content-Length: 804\r
     \r
     <h1>FrequentlyAskedQuestions</h1>
     <ul>

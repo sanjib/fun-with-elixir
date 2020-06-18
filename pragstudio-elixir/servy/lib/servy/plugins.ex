@@ -3,6 +3,7 @@ defmodule Servy.Plugins do
 
   require Logger
   alias Servy.Conv
+  alias Servy.FourOhFourCounter, as: Counter
 
   @doc ""
   def rewrite_path(conv = %Conv{path: path}) do
@@ -31,14 +32,17 @@ defmodule Servy.Plugins do
 
   @doc "Logs 404 requests"
   def track(conv = %{status: 404, path: path}) do
-    if Mix.env == :dev do
-      Logger.info "--> It's lunchtime somewhere."
-      Logger.warn "--> Do we have a problem, Houston?"
-      Logger.error "--> Danger Will Robinson!"
-    end
+#    if Mix.env == :dev do
+#      Logger.info "--> It's lunchtime somewhere."
+#      Logger.warn "--> Do we have a problem, Houston?"
+#      Logger.error "--> Danger Will Robinson!"
+#    end
     if Mix.env != :test do
       IO.puts "Warning: #{path} is on the loose!"
     end
+
+    Counter.bump_count(path)
+
     conv
   end
 

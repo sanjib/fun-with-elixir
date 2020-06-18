@@ -9,7 +9,7 @@ defmodule HttpServerTest do
     expected_response = """
     HTTP/1.1 200 OK\r
     Content-Type: text/html\r
-    Content-Length: 418\r
+    Content-Length: 444\r
     \r
     <h1>All the Bears</h1>
 

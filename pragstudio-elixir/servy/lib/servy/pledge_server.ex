@@ -6,9 +6,9 @@ defmodule Servy.PledgeServer do
   # _______________________________________________
   # Client interface
 
-  def start do
+  def start(initial_state \\ []) do
     IO.puts "Starting the pledge server..."
-    pid = spawn(__MODULE__, :listen_loop, [[]])
+    pid = spawn(__MODULE__, :listen_loop, [initial_state])
     Process.register(pid, @name)
     pid
   end
@@ -68,17 +68,17 @@ defmodule Servy.PledgeServer do
   end
 end
 
-pid = Servy.PledgeServer.start
-
-send pid, {:stop, "hammertime"}
-
-IO.inspect Servy.PledgeServer.create_pledge "larry", 10
-IO.inspect Servy.PledgeServer.create_pledge "moe", 20
-IO.inspect Servy.PledgeServer.create_pledge "curly", 30
-IO.inspect Servy.PledgeServer.create_pledge "daisy", 40
-IO.inspect Servy.PledgeServer.create_pledge "grace", 50
-
-IO.inspect Servy.PledgeServer.recent_pledges
-IO.inspect Servy.PledgeServer.total_pledged
-
-IO.inspect Process.info(pid, :messages)
+#pid = Servy.PledgeServer.start
+#
+#send pid, {:stop, "hammertime"}
+#
+#IO.inspect Servy.PledgeServer.create_pledge "larry", 10
+#IO.inspect Servy.PledgeServer.create_pledge "moe", 20
+#IO.inspect Servy.PledgeServer.create_pledge "curly", 30
+#IO.inspect Servy.PledgeServer.create_pledge "daisy", 40
+#IO.inspect Servy.PledgeServer.create_pledge "grace", 50
+#
+#IO.inspect Servy.PledgeServer.recent_pledges
+#IO.inspect Servy.PledgeServer.total_pledged
+#
+#IO.inspect Process.info(pid, :messages)

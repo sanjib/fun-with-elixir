@@ -70,3 +70,31 @@ iex> Process.info(parent, :messages)
 iex> flush                          
 :ok
 ```
+
+Finding a registered process:
+
+```console
+iex> Servy.PledgeServer.start
+Starting the pledge server...
+#PID<0.17535.0>
+iex> Process.whereis(Servy.PledgeServer)
+#PID<0.17535.0>
+iex> Process.unregister(Servy.PledgeServer)
+true
+iex> Process.whereis(Servy.PledgeServer)   
+nil
+iex> Process.registered
+[:logger_handler_watcher, :user, :elixir_code_server, :standard_error, :rex,
+ IEx.Supervisor, :kernel_refc, :kernel_sup, :httpd_sup, :global_name_server,
+ :code_server, :ssl_connection_sup, :erl_prim_loader, :file_server_2,
+ :ssl_admin_sup, Servy.PledgeServer, :ssl_sup, :application_controller,
+ :httpc_hex, Logger.Supervisor, :inet_db, :ssl_pem_cache,
+ Logger.BackendSupervisor, :hackney_sup, :ssl_manager, Hex.UpdateChecker,
+ Hex.Registry.Server, :observer, :wxe_master, Hex.Server, Hex.State,
+ Mix.ProjectStack, :kernel_safe_sup, :global_group, Mix.TasksServer,
+ :ssl_listen_tracker_sup, IEx.Broker, Mix.Supervisor, :hackney_manager,
+ :erts_code_purger, :user_drv, :erl_signal_server, :init, :httpc_sup,
+ :standard_error_sup, Logger, IEx.Config, :httpc_profile_sup, :httpc_manager,
+ :hackney_connections, ...]
+```
+

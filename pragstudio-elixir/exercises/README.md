@@ -1,14 +1,17 @@
 # Exercises
 
+- [Agents](./agents.md)
 - [Capture Functions](./capture_functions.md)
 - [Capturing Expressions](./capturing_expressions.md)
 - [Comprehensions](./comprehensions.md)
 - [Concurrent, Isolated Processes](./concurrent_isolated_processes.md)
 - [Elixir](./elixir.md)
 - [Implementing Map](./implement_map.md)
+- [Observer](./observer.md)
 - [Process & System](process_and_system.md)
 - [Recursion](./recursion.md)
 - [Task](./task.md)
+- [Test](./test.md)
 - [Timer](./timer.md)
 
 ## Bookmarks
@@ -27,4 +30,3 @@ iex> Enum.sum(1..1_000)
 iex> Enum.sum(1..10_000)
 50005000
 ```
-

@@ -11,8 +11,11 @@ defmodule Servy.Handler do
   alias Servy.BearController
   alias Servy.VideoCam
   alias Servy.Fetcher
-#  alias Servy.View
+  #  alias Servy.View
+  alias Servy.FourOhFourCounter, as: Counter
+
   import Servy.View, only: [render: 3]
+
 
   @doc "Transforms the request into a response."
   def handle(request) do
@@ -30,6 +33,9 @@ defmodule Servy.Handler do
 
   @doc "route"
 
+  # ________________________________________________________
+  # api
+
   def route(conv = %Conv{method: "GET", path: "/api/bears"}) do
     Servy.Api.BearController.index(conv)
   end
@@ -43,14 +49,14 @@ defmodule Servy.Handler do
 
     data =
       ["bigfoot", "roscoe", "brutus", "smokey"]
-#      |> Enum.map(&Task.async(fn -> Servy.Tracker.get_location(&1) end))
+      # |> Enum.map(&Task.async(fn -> Servy.Tracker.get_location(&1) end))
       |> Enum.map(&Task.async(Servy.Tracker, :get_location, [&1]))
       |> Enum.map(&Task.await/1)
 
-#    %{conv |
-#        status: 200,
-##        resp_body: inspect(locations, limit: :infinity)
-#    }
+    # %{conv |
+    #    status: 200,
+    #    resp_body: inspect(locations, limit: :infinity)
+    # }
 
     render(conv, "sensors.eex", data: data)
   end
@@ -67,7 +73,7 @@ defmodule Servy.Handler do
       Fetcher.get_result()
     end)
 
-#    %{conv | status: 200, resp_body: inspect(snapshots, limit: :infinity)}
+    # %{conv | status: 200, resp_body: inspect(snapshots, limit: :infinity)}
 
     render(conv, "snapshots.eex", snapshots: snapshots)
   end
@@ -88,9 +94,8 @@ defmodule Servy.Handler do
     Servy.PledgeController.create(conv, conv.params)
   end
 
-  def route(%Conv{ method: "GET", path: "/kaboom" } = _conv) do
-    raise "Kaboom!"
-  end
+  # ________________________________________________________
+  # hibernate
 
   def route(%Conv{ method: "GET", path: "/hibernate/" } = conv) do
     %{ conv | status: 200, resp_body: "Awake!" }
@@ -101,9 +106,8 @@ defmodule Servy.Handler do
     %{ conv | status: 200, resp_body: "Awake!" }
   end
 
-  def route(conv = %Conv{method: "GET", path: "/wildthings"}) do
-    %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
-  end
+  # ________________________________________________________
+  # bears
 
   def route(conv = %Conv{method: "GET", path: "/bears"}) do
     BearController.index(conv)
@@ -130,7 +134,17 @@ defmodule Servy.Handler do
     BearController.delete(conv, conv.params)
   end
 
-  @doc "about"
+  # ________________________________________________________
+  # about, faq, pages, 404s, kaboom, wildthings
+
+  def route(%Conv{ method: "GET", path: "/kaboom" } = _conv) do
+    raise "Kaboom!"
+  end
+
+  def route(conv = %Conv{method: "GET", path: "/wildthings"}) do
+    %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
+  end
+
   def route(conv = %Conv{method: "GET", path: "/about"}) do
     FileHandler.file_read(@about_file_path, conv)
   end
@@ -145,11 +159,21 @@ defmodule Servy.Handler do
     FileHandler.file_read("../../pages/#{page_name}.html", conv)
   end
 
+  def route(conv = %Conv{method: "GET", path: "/404s"}) do
+    %{conv | status: 200, resp_body: (inspect Counter.get_counts)}
+
+    render(conv, "404s.eex", four04s: Counter.get_counts)
+  end
+
+  # ________________________________________________________
+  # no match
+
   def route(conv = %Conv{path: path}) do
     %{conv | status: 404, resp_body: "No #{path} here!"}
   end
 
   @doc ""
+
   def emojify(conv = %Conv{status: 200}) do
     resp_body = """
     <*)))<
@@ -160,6 +184,8 @@ defmodule Servy.Handler do
   end
 
   def emojify(%Conv{} = conv), do: conv
+
+  @doc ""
 
   def format_response(%Conv{} = conv) do
 #    """
