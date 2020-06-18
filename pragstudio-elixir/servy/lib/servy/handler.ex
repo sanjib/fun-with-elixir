@@ -28,7 +28,7 @@ defmodule Servy.Handler do
     |> format_response
   end
 
-  @doc ""
+  @doc "route"
 
   def route(conv = %Conv{method: "GET", path: "/api/bears"}) do
     Servy.Api.BearController.index(conv)
@@ -76,6 +76,18 @@ defmodule Servy.Handler do
     Servy.Api.BearController.create(conv, conv.params)
   end
 
+  # ________________________________________________________
+  # pledges
+
+  def route(conv = %Conv{method: "GET", path: "/pledges"}) do
+    Servy.PledgeController.index(conv)
+  end
+
+  def route(conv = %Conv{method: "POST", path: "/pledges"}) do
+    IO.puts "--> #{inspect conv.params}"
+    Servy.PledgeController.create(conv, conv.params)
+  end
+
   def route(%Conv{ method: "GET", path: "/kaboom" } = _conv) do
     raise "Kaboom!"
   end
@@ -118,6 +130,7 @@ defmodule Servy.Handler do
     BearController.delete(conv, conv.params)
   end
 
+  @doc "about"
   def route(conv = %Conv{method: "GET", path: "/about"}) do
     FileHandler.file_read(@about_file_path, conv)
   end
