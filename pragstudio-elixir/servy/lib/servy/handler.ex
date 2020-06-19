@@ -89,8 +89,31 @@ defmodule Servy.Handler do
     Servy.PledgeController.index(conv)
   end
 
+  def route(conv = %Conv{method: "GET", path: "/pledges/new"}) do
+    IO.puts "--> get /pledges/new: #{inspect conv.params}"
+
+    error = %{name: "", amount: ""}
+    Servy.PledgeController.new(conv, conv.params, error)
+  end
+
+  def route(conv = %Conv{method: "POST", path: "/pledges/new"}) do
+    IO.puts "--> post /pledges/new #{inspect conv.params}"
+
+    error_name = if conv.params["name"] == "", do: "Please enter a name"
+    error_amount = if conv.params["amount"] == "", do: "Please enter an amount"
+    error = %{name: error_name, amount: error_amount}
+
+    cond do
+      conv.params["name"] == "" || conv.params["amount"] == "" ->
+        IO.puts ("--> error: #{inspect error}")
+        Servy.PledgeController.new(conv, conv.params, error)
+      true ->
+        Servy.PledgeController.create(conv, conv.params)
+    end
+  end
+
   def route(conv = %Conv{method: "POST", path: "/pledges"}) do
-    IO.puts "--> #{inspect conv.params}"
+    IO.puts "--> post /pledges/create #{inspect conv.params}"
     Servy.PledgeController.create(conv, conv.params)
   end
 

@@ -19,6 +19,25 @@ Listening for connection requests on port 4000...
 Waiting to accept a client connection...
 ```
 
+## Misc
+
+Posting to Servy.PledgeServer using HTTPoison:
+
+```console
+iex> url = "http://localhost:4000/pledges"
+"http://localhost:4000/pledges"
+
+iex> headers = [{"Content-Type", "application/x-www-form-urlencoded"}]
+[{"Content-Type", "application/x-www-form-urlencoded"}]
+
+iex> body = "name=larry&amount=100"
+"name=larry&amount=100"
+
+iex> HTTPoison.post url, body, headers
+
+```
+
+
 Some notable code, note the Poison.decode function param "as:".
 Converts a regular map inside a list to a struct %Bear.
 

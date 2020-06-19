@@ -98,3 +98,68 @@ iex> Process.registered
  :hackney_connections, ...]
 ```
 
+Check message queue length
+
+```console
+iex> pid = Servy.PledgeServer.start
+Starting the pledge server...
+#PID<0.240.0>
+iex> 1..500 |> Enum.each(fn(n) -> send pid, {:stop, "hammertime #{n}"} end)
+:ok
+iex> for n <- 501..1000, do: send pid, {:stop, "hammertime #{n}"}
+[
+  stop: "hammertime 501",
+  stop: "hammertime 502",
+  stop: "hammertime 503",
+  stop: "hammertime 504",
+  stop: "hammertime 505",
+  stop: "hammertime 506",
+  stop: "hammertime 507",
+  stop: "hammertime 508",
+  stop: "hammertime 509",
+  stop: "hammertime 510",
+  stop: "hammertime 511",
+  stop: "hammertime 512",
+  stop: "hammertime 513",
+  stop: "hammertime 514",
+  stop: "hammertime 515",
+  stop: "hammertime 516",
+  stop: "hammertime 517",
+  stop: "hammertime 518",
+  stop: "hammertime 519",
+  stop: "hammertime 520",
+  stop: "hammertime 521",
+  stop: "hammertime 522",
+  stop: "hammertime 523",
+  stop: "hammertime 524",
+  stop: "hammertime 525",
+  stop: "hammertime 526",
+  stop: "hammertime 527",
+  stop: "hammertime 528",
+  stop: "hammertime 529",
+  stop: "hammertime 530",
+  stop: "hammertime 531",
+  stop: "hammertime 532",
+  stop: "hammertime 533",
+  stop: "hammertime 534",
+  stop: "hammertime 535",
+  stop: "hammertime 536",
+  stop: "hammertime 537",
+  stop: "hammertime 538",
+  stop: "hammertime 539",
+  stop: "hammertime 540",
+  stop: "hammertime 541",
+  stop: "hammertime 542",
+  stop: "hammertime 543",
+  stop: "hammertime 544",
+  stop: "hammertime 545",
+  stop: "hammertime 546",
+  stop: "hammertime 547",
+  stop: "hammertime 548",
+  stop: "hammertime 549",
+  stop: "hammertime 550",
+  ...
+]
+iex> Process.info(pid, :message_queue_len)
+{:message_queue_len, 1000}
+```

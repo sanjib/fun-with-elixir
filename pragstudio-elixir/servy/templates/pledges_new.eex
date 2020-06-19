@@ -1,0 +1,28 @@
+<style>
+    label {
+        width: 70px;
+        display: inline-block;
+    }
+    div {
+        margin-bottom: 5px;
+    }
+    .error {
+        color: red;
+    }
+</style>
+
+<h1>Create Pledge</h1>
+
+<form method="post" action="/pledges/new">
+    <div>
+        <label for="name">Name:</label>
+        <input id="name" name="name" value="<%= name %>" />
+        <span class="error"><%= error.name %></span>
+    </div>
+    <div>
+        <label for="amount">Amount:</label>
+        <input id="amount" name="amount" value="<%= amount %>" />
+        <span class="error"><%= error.amount %></span>
+    </div>
+    <input type="submit" />
+</form>

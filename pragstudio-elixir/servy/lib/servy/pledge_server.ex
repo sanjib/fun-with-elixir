@@ -52,10 +52,11 @@ defmodule Servy.PledgeServer do
         listen_loop(state)
 
       {sender, :total_pledged} ->
-#        total = Enum.reduce(state, 0, fn {_name, amount}, acc -> amount + acc  end)
+        # total = Enum.reduce(state, 0, fn {_name, amount}, acc -> amount + acc  end)
         total = Enum.map(state, &elem(&1, 1)) |> Enum.sum
         send sender, {:response, total}
         listen_loop(state)
+
       unexpected ->
         IO.puts "--> unexpected msg: #{inspect unexpected}"
         listen_loop(state)
