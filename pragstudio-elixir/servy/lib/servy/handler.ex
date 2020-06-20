@@ -40,14 +40,7 @@ defmodule Servy.Handler do
     Servy.Api.BearController.index(conv)
   end
 
-  # will override the /api/sensors below this function
   def route(conv = %Conv{method: "GET", path: "/api/sensors"}) do
-    sensor_data = Servy.SensorServer.get_sensor_data()
-
-    %{conv | status: 200, resp_body: inspect sensor_data}
-  end
-
-  def route(conv = %Conv{method: "GET", path: "/api/sensors-variation"}) do
 
 #    locations =
 #      ["bigfoot", "roscoe", "brutus", "smokey"]
