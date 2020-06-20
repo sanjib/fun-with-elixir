@@ -6,6 +6,6 @@ defmodule Servy.VideoCam do
 
     # dummy response
 #    "#{camera_name}-snapshot.jpg"
-    "#{camera_name}-snapshot.jpg"
+    "#{camera_name}-snapshot-#{:rand.uniform(1000)}.jpg"
   end
 end

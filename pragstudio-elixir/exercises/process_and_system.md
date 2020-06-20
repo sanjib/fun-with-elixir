@@ -163,3 +163,8 @@ iex> for n <- 501..1000, do: send pid, {:stop, "hammertime #{n}"}
 iex> Process.info(pid, :message_queue_len)
 {:message_queue_len, 1000}
 ```
+
+Process.send_after
+
+`timer_ref = Process.send_after(pid, :hi, 1000)
+`
