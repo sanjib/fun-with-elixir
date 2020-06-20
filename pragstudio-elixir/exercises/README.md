@@ -6,6 +6,7 @@
 - [Comprehensions](./comprehensions.md)
 - [Concurrent, Isolated Processes](./concurrent_isolated_processes.md)
 - [Elixir](./elixir.md)
+- [GenServer](./gen_server.md)
 - [Implementing Map](./implement_map.md)
 - [Observer](./observer.md)
 - [Process & System](process_and_system.md)
