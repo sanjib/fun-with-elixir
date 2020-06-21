@@ -2,39 +2,59 @@ defmodule Servy.SensorServer do
   use GenServer
 
   @name __MODULE__
-  @refresh_interval :timer.seconds(5) # in production, use :timer.minutes(60)
+  #@refresh_interval :timer.seconds(5) # in production, use :timer.minutes(60)
+
+  defmodule State do
+    defstruct sensor_data: %{},
+              timer_ref: nil,
+              refresh_interval: :timer.minutes(60)
+  end
 
   # Client interface
 
   def start() do
-    GenServer.start(__MODULE__, %{}, name: @name)
+    IO.puts "Starting the SensorServer..."
+    GenServer.start(__MODULE__, %State{}, name: @name)
   end
 
   def get_sensor_data() do
-    GenServer.call(@name, :get_sensor_data)
+    GenServer.call @name, :get_sensor_data
+  end
+
+  def set_refresh_interval(time) do
+    GenServer.cast @name, {:set_refresh_interval, time}
   end
 
   # Server callbacks
 
-  def init(_state) do
-    initial_state = run_tasks_to_get_sensor_data()
-    schedule_refresh()
-    {:ok, initial_state}
+  def init(state) do
+    sensor_data = run_tasks_to_get_sensor_data()
+    timer_ref = schedule_refresh(state.refresh_interval)
+    {:ok, %{state | sensor_data: sensor_data, timer_ref: timer_ref}}
   end
 
   def handle_call(:get_sensor_data, _from, state) do
-    {:reply, state, state}
+    {:reply, state.sensor_data, state}
   end
 
-  def handle_info(:refresh, _state) do
+  def handle_cast({:set_refresh_interval, time}, state) do
+    Process.cancel_timer(state.timer_ref)
+    timer_ref = schedule_refresh(time)
+    {:noreply, %{state | refresh_interval: time, timer_ref: timer_ref}}
+  end
+
+  def handle_info(:refresh, state) do
     IO.puts "Refreshing the cache..."
-    new_state = run_tasks_to_get_sensor_data()
-    schedule_refresh()
-    {:noreply, new_state}
+    sensor_data = run_tasks_to_get_sensor_data()
+    timer_ref = schedule_refresh(state.refresh_interval)
+    {:noreply, %{state | sensor_data: sensor_data, timer_ref: timer_ref}}
   end
 
-  defp schedule_refresh() do
-    Process.send_after(self(), :refresh, @refresh_interval)
+  #________________________________________________________
+  # Helper functions
+
+  defp schedule_refresh(refresh_interval) do
+    Process.send_after(self(), :refresh, refresh_interval)
   end
 
   defp run_tasks_to_get_sensor_data() do
