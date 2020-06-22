@@ -4,9 +4,9 @@ defmodule Servy.KickStarter do
   @name __MODULE__
   @http_server :http_server
 
-  def start() do
+  def start_link(_arg) do
     IO.puts "Starting Kick Starter..."
-    GenServer.start(__MODULE__, :ok, name: @name)
+    GenServer.start_link(__MODULE__, :ok, name: @name)
   end
 
   def get_server_whereis() do

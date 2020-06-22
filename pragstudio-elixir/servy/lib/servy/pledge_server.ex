@@ -12,9 +12,9 @@ defmodule Servy.PledgeServer do
   #________________________________________________
   # Client interface
 
-  def start() do
-    IO.puts "Starting the pledge server..."
-    GenServer.start(__MODULE__, %State{}, name: @name)
+  def start_link(_arg) do
+    IO.puts "Starting the Pledge Server..."
+    GenServer.start_link(__MODULE__, %State{}, name: @name)
   end
 
   def create_pledge(name, amount) do
