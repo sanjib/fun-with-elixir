@@ -1,6 +1,6 @@
 defmodule Servy.Fetcher do
 
-  alias Servy.VideoCam
+#  alias Servy.VideoCam
 
   def async(fun) do
     parent = self()
