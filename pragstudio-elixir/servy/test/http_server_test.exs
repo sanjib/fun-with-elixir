@@ -80,6 +80,8 @@ defmodule HttpServerTest do
           assert response.body == "Bears, Lions, Tigers"
       end
     end)
+
+    :timer.sleep(100)
   end
 
   test "GET 5 requests using Task & HTTPoison" do
@@ -92,6 +94,8 @@ defmodule HttpServerTest do
       assert response.status_code == 200
       assert response.body == "Bears, Lions, Tigers"
     end)
+
+    :timer.sleep(100)
   end
 
   test "status_code 200 for 5 different URLs /bears/<id>" do
@@ -105,6 +109,8 @@ defmodule HttpServerTest do
       {:ok, response} = Task.await(pid)
       assert response.status_code == 200
     end)
+
+    :timer.sleep(100)
   end
 
   test "status_code 200 for 5 different URLs" do
@@ -124,6 +130,9 @@ defmodule HttpServerTest do
       {:ok, response} = Task.await(pid)
       assert response.status_code == 200
     end)
+
+    :timer.sleep(100)
   end
 
 end
+

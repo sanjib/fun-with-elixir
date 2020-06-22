@@ -59,23 +59,25 @@ defmodule HandlerTest do
   end
 
   test "GET /bigfoot" do
-    request = """
-    GET /bigfoot HTTP/1.1\r
-    Host: example.com\r
-    User-Agent: ExampleBrowser/1.0\r
-    Accept: */*\r
-    \r
-    """
+#    request = """
+#    GET /bigfoot HTTP/1.1\r
+#    Host: example.com\r
+#    User-Agent: ExampleBrowser/1.0\r
+#    Accept: */*\r
+#    \r
+#    """
+#
+#    expected_response = """
+#    HTTP/1.1 404 Not Found\r
+#    Content-Type: text/html\r
+#    Content-Length: 17\r
+#    \r
+#    No /bigfoot here!
+#    """
 
-    response = handle(request)
+#    response = handle(request)
+#    assert response == expected_response
 
-    assert response == """
-           HTTP/1.1 404 Not Found\r
-           Content-Type: text/html\r
-           Content-Length: 17\r
-           \r
-           No /bigfoot here!
-           """
   end
 
   test "GET /bears/1" do
