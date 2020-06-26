@@ -1,7 +1,6 @@
 defmodule Bingo.Buzzwords do
   @moduledoc false
 
-  alias Bingo.{Square}
 
   def read_buzzwords() do
     Path.absname("data")

@@ -52,7 +52,11 @@ defmodule Bingo.Game do
         cond do
           is_struct(square.marked_by) ->
             player_name = square.marked_by.name
-            Map.put(acc, player_name, square.points)
+
+            previous_score = Map.get(acc, player_name)
+            previous_score = if previous_score == nil, do: 0, else: previous_score
+
+            Map.put(acc, player_name, (square.points + previous_score))
           true -> acc
         end
       end)
@@ -60,8 +64,13 @@ defmodule Bingo.Game do
   end
 
   defp update_winner(game) do
-    # TODO: implement code to determine winner
-    game
+    player = BingoChecker.bingo?(game.squares)
+    cond do
+      is_struct(player) ->
+        %{game | winner: player}
+      true ->
+        game
+    end
   end
 
 end

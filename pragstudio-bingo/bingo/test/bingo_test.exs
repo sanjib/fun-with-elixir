@@ -13,7 +13,7 @@ defmodule BingoTest do
     assert total_size == size * size
   end
 
-  test "bing checker row list" do
+  test "bingo checker row list" do
     size = 5
     expected = [
       [ 0,  1,  2,  3,  4],
@@ -25,7 +25,7 @@ defmodule BingoTest do
     assert expected == Bingo.BingoChecker.row_list(size)
   end
 
-  test "bing checker col list" do
+  test "bingo checker col list" do
     size = 5
     expected = [
       [ 0,  5, 10, 15, 20],
@@ -37,12 +37,27 @@ defmodule BingoTest do
     assert expected == Bingo.BingoChecker.col_list(size)
   end
 
-  test "bing checker diag list" do
+  test "bingo checker diag list" do
     size = 5
     expected = [
       [ 0,  6, 12, 18, 24],
       [ 4,  8, 12, 16, 20],
     ]
     assert expected == Bingo.BingoChecker.diag_list(size)
+  end
+
+  test "bingo checker total list size" do
+    size = 3
+    actual_size_total = size + size + 2
+    expected_size_total =
+      [
+        Bingo.BingoChecker.row_list(size),
+        Bingo.BingoChecker.col_list(size),
+        Bingo.BingoChecker.diag_list(size),
+      ]
+      |> Enum.concat
+      |> length
+
+    assert actual_size_total == expected_size_total
   end
 end
