@@ -43,11 +43,11 @@ defmodule Bingo.GameDisplay do
   # bingo_winner
 
   defp bingo_winner(%Player{} = player) do
-    ":-) Bingo! Winner is: #{player.name}"
+    ":-) Bingo! Winner is: #{player.name}."
   end
 
   defp bingo_winner(nil) do
-    ":-( No bingo (yet)"
+    ":-( No bingo (yet)!"
   end
 
   #_______________________________________

@@ -4,6 +4,7 @@ defmodule Bingo.Game do
   alias Bingo.{Buzzwords, Game, Square, BingoChecker, Player}
 
   defstruct [
+    name: "",
     squares: nil,
     winner: nil,
     scores: %{},

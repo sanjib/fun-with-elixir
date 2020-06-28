@@ -16,7 +16,7 @@ defmodule Bingo.Square do
 
   def update_phrase(%Square{} = square, phrase, player) do
     cond do
-      square.phrase == phrase ->
+      square.phrase == phrase && square.marked_by == nil ->
         %{square | marked_by: player}
       true -> square
     end
