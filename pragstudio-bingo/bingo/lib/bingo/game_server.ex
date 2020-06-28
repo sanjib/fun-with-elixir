@@ -9,6 +9,7 @@ defmodule Bingo.GameServer do
   # Client interface
 
   def start_link(game_name, size) do
+    IO.puts "Starting Game Server #{game_name}..."
     GenServer.start_link(__MODULE__, {game_name, size}, name: game_name)
   end
 

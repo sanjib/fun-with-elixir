@@ -6,6 +6,7 @@ defmodule Bingo.Buzzwords do
     "../../data/#{filename_in_data_dir}"
     |> Path.expand(__DIR__)
     |> File.read!
+    |> String.trim
     |> String.split("\n")
     |> Enum.map(&String.trim/1)
 

@@ -1,1 +1,7 @@
-alias Bingo.{Game, Buzzwords, Player, GameDisplay}
+alias Bingo.{
+  Buzzwords,
+  BuzzwordCache,
+  Game,
+  GameDisplay,
+  Player,
+  }
