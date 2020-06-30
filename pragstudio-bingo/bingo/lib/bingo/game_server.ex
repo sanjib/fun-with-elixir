@@ -75,7 +75,7 @@ defmodule Bingo.GameServer do
     }
   end
 
-  def summarize(game) do
+  defp summarize(game) do
     %{
       scores: game.scores,
       squares: game.squares,
