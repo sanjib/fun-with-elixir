@@ -3,5 +3,6 @@ alias Bingo.{
   BuzzwordCache,
   Game,
   GameDisplay,
+  GameServer,
   Player,
   }

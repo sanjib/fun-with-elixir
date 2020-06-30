@@ -47,7 +47,7 @@ defmodule Bingo.BuzzwordCache do
 
   def handle_info(:refresh, state) do
     buzzwords = Bingo.Buzzwords.read_buzzwords(state.filename)
-    IO.puts "--> refreshed! buzzwords: #{inspect buzzwords}"
+    # IO.puts "--> refreshed! buzzwords: #{inspect buzzwords}"
 
     new_timer_ref = schedule_refresh(state.refresh_interval, state.timer_ref)
     {:noreply, %{state | buzzwords: buzzwords, timer_ref: new_timer_ref}}
