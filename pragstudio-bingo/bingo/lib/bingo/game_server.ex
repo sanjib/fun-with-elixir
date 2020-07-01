@@ -25,6 +25,16 @@ defmodule Bingo.GameServer do
     GenServer.call via_tuple(game_name), :display
   end
 
+  # _________________
+  # API
+  def child_spec(args) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, args},
+      restart: :transient,
+    }
+  end
+
   #_________________
   # Server callbacks
 

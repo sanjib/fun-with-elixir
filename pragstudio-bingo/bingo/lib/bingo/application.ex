@@ -7,6 +7,7 @@ defmodule Bingo.Application do
     children = [
       {Registry, keys: :unique, name: Bingo.GameRegistry},
       {Bingo.BuzzwordCache, ["buzz_test.csv", :timer.minutes(5)]},
+      Bingo.GameSupervisor,
     ]
 
     opts = [strategy: :one_for_one, name: Bingo.Supervisor]

@@ -4,5 +4,6 @@ alias Bingo.{
   Game,
   GameDisplay,
   GameServer,
+  GameSupervisor,
   Player,
   }
