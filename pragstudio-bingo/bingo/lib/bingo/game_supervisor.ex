@@ -33,6 +33,8 @@ defmodule Bingo.GameSupervisor do
   end
 
   def stop_game(game_name) do
+    :ets.delete(:bingo_games_table, game_name)
+
     game_pid = Bingo.GameServer.game_pid(game_name)
     DynamicSupervisor.terminate_child(__MODULE__, game_pid)
   end

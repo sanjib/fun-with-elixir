@@ -1,4 +1,4 @@
-defmodule GameSupervisorTests do
+defmodule GameSupervisorTest do
   use ExUnit.Case
 
   test "create" do
@@ -38,7 +38,6 @@ defmodule GameSupervisorTests do
     game_name = "halo-rising"
     game_size = 3
     Bingo.GameSupervisor.start_game(game_name, game_size)
-    game = Bingo.GameServer.summary(game_name)
 
     # ASSERT GAME IS ALIVE
     pid = Bingo.GameServer.game_pid(game_name)
@@ -67,4 +66,26 @@ defmodule GameSupervisorTests do
     Bingo.GameSupervisor.stop_game(game2_name)
     Bingo.GameSupervisor.stop_game(game3_name)
   end
+
+  test "game state after exit" do
+    game_name = "twice-reborn"
+    game_size = 3
+    {:ok, game_pid} = Bingo.GameSupervisor.start_game(game_name, game_size)
+    game = Bingo.GameServer.summary(game_name)
+    phrases_row1 = game.squares |> List.first |> Enum.map(fn square -> square.phrase end)
+
+    # ASSERT FIRST ROW OF PHRASES AFTER EXIT
+    # AKA SAME GAME STATE
+    Process.exit(game_pid, :terminate)
+    # sleep a little for process to start!
+    # a better option might be to receive a message
+    # or maybe monitor the process
+    :timer.sleep(100)
+
+    game_reborn = Bingo.GameServer.summary(game_name)
+    phrases_row1_game_reborn = game_reborn.squares |> List.first |> Enum.map(fn square -> square.phrase end)
+
+    assert phrases_row1 == phrases_row1_game_reborn
+  end
+
 end

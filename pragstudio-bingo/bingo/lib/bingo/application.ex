@@ -10,6 +10,8 @@ defmodule Bingo.Application do
       Bingo.GameSupervisor,
     ]
 
+    :ets.new(:bingo_games_table, [:public, :named_table])
+
     opts = [strategy: :one_for_one, name: Bingo.Supervisor]
     Supervisor.start_link(children, opts)
   end

@@ -40,7 +40,17 @@ defmodule Bingo.GameServer do
 
   def init({game_name, size}) do
     buzzwords = Bingo.BuzzwordCache.get_buzzwords()
-    game = Bingo.Game.new(buzzwords, size)
+
+    game =
+      case :ets.lookup(:bingo_games_table, game_name) do
+        [] ->
+          game = Bingo.Game.new(buzzwords, size)
+          :ets.insert(:bingo_games_table, {game_name, game})
+          game
+        [{^game_name, game}] ->
+          game
+      end
+
     {:ok, %{game | name: game_name}, @timeout}
   end
 
@@ -50,6 +60,10 @@ defmodule Bingo.GameServer do
 
   def handle_call({:mark, phrase, player}, _from, game) do
     new_game = Bingo.Game.mark(game, phrase, player)
+
+    # :ets.insert(:bingo_games_table, {new_game.name, new_game})
+    :ets.insert(:bingo_games_table, {get_game_name(), new_game})
+
     {:reply, summarize(new_game), new_game, @timeout}
   end
 
@@ -66,6 +80,7 @@ defmodule Bingo.GameServer do
 
   def terminate({:shutdown, :timeout}, _game) do
     IO.puts "--> terminate({:shutdown, :timeout}) called"
+    :ets.delete(:bingo_games_table, get_game_name())
     :ok
   end
 
@@ -97,4 +112,7 @@ defmodule Bingo.GameServer do
     game_name |> via_tuple |> GenServer.whereis
   end
 
+  defp get_game_name() do
+    Registry.keys(Bingo.GameRegistry, self()) |> List.first
+  end
 end
