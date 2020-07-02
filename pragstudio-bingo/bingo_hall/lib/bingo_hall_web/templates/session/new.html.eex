@@ -1,0 +1,28 @@
+<style>
+.steelblue { color: steelblue; }
+.forestgreen { color: forestgreen; }
+.sienna { color: sienna; }
+.indianred { color: indianred; }
+.orange { color: orange; }
+</style>
+
+<h1>Welcome to Buzzwords Bingo!</h1>
+<p>Please state your name and choose a color:</p>
+
+<%= form_for @conn, Routes.session_path(@conn, :create), [as: :player], fn f -> %>
+
+<div>
+<%= text_input f, :name, placeholder: "Name", autofocus: true, required: true %>
+</div>
+
+<div>
+<label class="steelblue"><%= radio_button f, :color, "steelblue", checked: true %> Steel Blue</label>
+<label class="forestgreen"><%= radio_button f, :color, "forestgreen" %> Forest Green</label>
+<label class="sienna"><%= radio_button f, :color, "sienna" %> Sienna</label>
+<label class="indianred"><%= radio_button f, :color, "indianred" %> Indian Red</label>
+<label class="orange"><%= radio_button f, :color, "orange" %> Orange</label>
+</div>
+
+<div><%= submit "Play Bingo!" %></div>
+
+<% end %>
