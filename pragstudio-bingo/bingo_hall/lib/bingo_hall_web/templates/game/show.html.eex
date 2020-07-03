@@ -5,12 +5,6 @@
 <button id="copy_url">Copy URL</button>
 </div>
 
-<p>
-game name: <%= @game_name %><br>
-auth token: <%= @auth_token %><br>
-ws url: <%= ws_url() %>
-</p>
-
 <div id="game-container"
   data-game-name="<%= @game_name %>"
   data-auth-token="<%= @auth_token %>"

@@ -19,7 +19,8 @@ config :bingo_hall, BingoHallWeb.Endpoint,
       "--watch-stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
-  ]
+  ],
+  ws_url: "ws://192.168.0.103:4000/socket/websocket"
 
 # ## SSL Support
 #

@@ -74,13 +74,14 @@ defmodule Bingo.GameServer do
   end
 
   def handle_info(:timeout, game) do
-    IO.puts "--> :timeout called"
+    #IO.puts "--> :timeout called"
     {:stop, {:shutdown, :timeout}, game}
   end
 
   def terminate({:shutdown, :timeout}, _game) do
-    IO.puts "--> terminate({:shutdown, :timeout}) called"
-    :ets.delete(:bingo_games_table, get_game_name())
+    game_name = get_game_name()
+    IO.puts "--> timeout -> terminated -> #{game_name}"
+    :ets.delete(:bingo_games_table, game_name)
     :ok
   end
 
@@ -101,12 +102,29 @@ defmodule Bingo.GameServer do
   end
 
   defp summarize(game) do
+#    squares =
+#      game.squares
+#      |> Enum.map(fn row ->
+#        Enum.map(row, fn square ->
+#          Map.from_struct(square)
+#        end)
+#      end)
+
+    squares = for row <- game.squares do
+      Enum.map(row, fn square ->
+        Map.from_struct(%{square | marked_by: marked_by(square.marked_by)})
+      end)
+    end
+
     %{
       scores: game.scores,
-      squares: game.squares,
+      squares: squares,
       winner: game.winner,
     }
   end
+
+  defp marked_by(%Bingo.Player{} = player), do: Map.from_struct(player)
+  defp marked_by(nil), do: nil
 
   def game_pid(game_name) do
     game_name |> via_tuple |> GenServer.whereis
