@@ -1,0 +1,43 @@
+<h1>Game: <%= @game_name %></h1>
+
+<div>
+<input id="game_url" type="text" value="<%= game_url(@conn) %>">
+<button id="copy_url">Copy URL</button>
+</div>
+
+<p>
+game name: <%= @game_name %><br>
+auth token: <%= @auth_token %><br>
+ws url: <%= ws_url() %>
+</p>
+
+<div id="game-container"
+  data-game-name="<%= @game_name %>"
+  data-auth-token="<%= @auth_token %>"
+  data-ws-url="<%= ws_url() %>">
+</div>
+
+<div>
+<a href="<%= Routes.game_path(@conn, :new) %>"><button>New Game</button></a>
+</div>
+
+<script>
+(function() {
+  const copy_url = document.getElementById("copy_url");
+  const game_url = document.getElementById("game_url");
+
+  // Prevent button width change when changing button text
+  copy_url.style.width = copy_url.offsetWidth + "px";
+
+  document.getElementById("copy_url").addEventListener("click", function() {
+    game_url.select();
+    document.execCommand("copy");
+
+    copy_url.innerHTML = "Copied!";
+    setTimeout(function() {
+      copy_url.innerHTML = "Copy URL"
+    }, 1000);
+
+  });
+})();
+</script>

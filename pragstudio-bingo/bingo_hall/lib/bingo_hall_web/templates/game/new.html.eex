@@ -1,2 +1,17 @@
-Game new
+<h1>New Game</h1>
 
+<p>Please select game size:</p>
+
+<%= form_for @conn, Routes.game_path(@conn, :create), [as: :game], fn f -> %>
+
+<div>
+<label><%= radio_button f, :size, 3, checked: true %> 3x3</label>
+<label><%= radio_button f, :size, 4 %> 4x4</label>
+<label><%= radio_button f, :size, 5 %> 5x5</label>
+</div>
+
+<div>
+<%= submit "Start Game" %>
+</div>
+
+<% end %>
