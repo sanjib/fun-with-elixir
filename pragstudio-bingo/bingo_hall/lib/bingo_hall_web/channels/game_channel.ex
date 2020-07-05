@@ -16,11 +16,10 @@ defmodule BingoHallWeb.GameChannel do
     #IO.inspect summary
 
     push(socket, "game_summary", summary)
-
-    push(socket, "presence_state", Presence.list(socket))
+    push(socket, "presence_state", BingoHallWeb.Presence.list(socket))
 
     {:ok, _} =
-      Presence.track(socket, current_player(socket).name, %{
+      BingoHallWeb.Presence.track(socket, current_player(socket).name, %{
         online_at: inspect(System.system_time(:seconds)),
         color: current_player(socket).color
       })

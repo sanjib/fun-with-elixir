@@ -12,9 +12,10 @@ defmodule BingoHall.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: BingoHall.PubSub},
       # Start the Endpoint (http/https)
-      BingoHallWeb.Endpoint
+      BingoHallWeb.Endpoint,
       # Start a worker by calling: BingoHall.Worker.start_link(arg)
       # {BingoHall.Worker, arg}
+      BingoHallWeb.Presence,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
