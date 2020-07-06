@@ -2,11 +2,13 @@ defmodule LiveViewStudioWeb.LightLive do
   use LiveViewStudioWeb, :live_view
 
   def mount(_params, _session, socket) do
+    IO.puts "--> MOUNT #{inspect self()}"
     socket = assign(socket, :brightness, 10)
     {:ok, socket}
   end
 
   def render(assigns) do
+    IO.puts "--> RENDER #{inspect self()}"
     ~L"""
     <h1>Front Porch Light</h1>
     <div id="light">
@@ -23,6 +25,7 @@ defmodule LiveViewStudioWeb.LightLive do
     <button phx-click="on">On</button>
     <br>
     <button phx-click="random">Random</button>
+
     """
   end
 
@@ -38,6 +41,7 @@ defmodule LiveViewStudioWeb.LightLive do
   end
 
   def handle_event("on", _, socket) do
+    IO.puts "--> ON #{inspect self()}"
     socket = assign(socket, :brightness, 100)
     {:noreply, socket}
   end
