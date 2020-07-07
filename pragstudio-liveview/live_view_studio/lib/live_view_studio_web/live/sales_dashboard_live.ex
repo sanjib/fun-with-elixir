@@ -11,7 +11,7 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
     socket = assign(socket,
       new_orders: Sales.new_orders(),
       sales_amount: Sales.sales_amount(),
-      satisfaction: Sales.satisfaction(),
+      satisfaction: Sales.satisfaction()
     )
     {:ok, socket}
   end
@@ -26,7 +26,7 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
           <span class="name">New Orders</span>
         </div>
         <div class="stat">
-          <span class="value"><%= number_to_currency(@sales_amount, precision: 0,) %></span>
+          <span class="value"><%= number_to_currency(@sales_amount, precision: 0) %></span>
           <span class="name">Sales Amount</span>
         </div>
         <div class="stat">

@@ -118,6 +118,18 @@
 #license .amount {
   font-size: 1.5em;
 }
+#license .time-remaining {
+  text-align: center;
+}
+#license .time-remaining .value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: darkred;
+}
+#license .time-remaining .label {
+  font-size: 1.2em;
+  color: gray;
+}
 
 /* /sales-dashboard */
 #dashboard .stats {
