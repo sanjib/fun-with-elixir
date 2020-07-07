@@ -25,12 +25,21 @@ defmodule LiveViewStudioWeb.LightLive do
     <button phx-click="on">On</button>
     <br>
     <button phx-click="random">Random</button>
+    <form phx-change="range_update_brightness">
+      <input type="range" name="brightness" value="<%= @brightness %>" min="0" max="100" step="10" />
+    </form>
 
     """
   end
 
+  def handle_event("range_update_brightness", %{"brightness" => brightness}, socket) do
+    brightness = String.to_integer(brightness)
+    socket = assign(socket, brightness: brightness)
+    {:noreply, socket}
+  end
+
   def handle_event("random", _, socket) do
-    socket = assign(socket, :brightness, Enum.random(0..100))
+    socket = assign(socket, :brightness, Enum.random(0..10) * 10)
     #socket = assign(socket, :brightness, :rand.uniform(100))
     {:noreply, socket}
   end
