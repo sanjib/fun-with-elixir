@@ -11,7 +11,7 @@ defmodule LiveViewStudioWeb.LightLive do
     IO.puts "--> RENDER #{inspect self()}"
     ~L"""
     <h1>Front Porch Light</h1>
-    <div id="light">
+    <div class="light">
       <div class="meter">
         <span style="width: <%= @brightness %>%">
           <%= @brightness %>%
