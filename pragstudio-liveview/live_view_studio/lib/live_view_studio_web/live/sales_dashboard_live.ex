@@ -52,7 +52,7 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
 
       <form phx-change="update_refresh_interval">
         <select name="refresh_interval">
-          <%= options_for_select(refresh_options, @refresh_interval) %>
+          <%= options_for_select(refresh_options(), @refresh_interval) %>
         </select>
       </form>
 
@@ -70,7 +70,7 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
 
   def handle_event("update_refresh_interval", %{"refresh_interval" => refresh_interval}, socket) do
     refresh_interval = String.to_integer(refresh_interval)
-    IO.puts "--> updated refresh interval: #{refresh_interval}"
+    # IO.puts "--> updated refresh interval: #{refresh_interval}"
     socket = assign(socket, :refresh_interval, refresh_interval)
     {:noreply, socket}
   end
@@ -95,7 +95,7 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
 
   defp schedule_refresh(socket) do
     refresh_interval = socket.assigns.refresh_interval
-    IO.puts "--> refresh interval: #{refresh_interval}"
+    # IO.puts "--> refresh interval: #{refresh_interval}"
     Process.send_after(self(), :tick, refresh_interval * 1000)
   end
 end

@@ -18,7 +18,7 @@ defmodule LiveViewStudioWeb.LicenseLive do
       seats: seats,
       amount: amount,
       exp_time: expiration_time,
-      time_rem: time_remaining,
+      time_rem: time_remaining
     )
     {:ok, socket}
   end
