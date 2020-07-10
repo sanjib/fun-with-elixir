@@ -157,10 +157,16 @@
   list-style: none;
 }
 .stores li {
-  padding: 10px 0;
-  border-bottom: 1px solid black;
+  padding: 20px;
+  //border-bottom: 1px solid black;
+  background: aliceblue;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 .stores li:first-child {
-  border-top: 1px solid black;
+  //border-top: 1px solid black;
+}
+.stores .country {
+  margin-bottom: 10px;
 }
 

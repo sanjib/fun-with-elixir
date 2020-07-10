@@ -132,6 +132,36 @@ defmodule LiveViewStudio.KinokuniyaStores do
         phone: "+62-(0)21-57900022",
         opening_hours: "",
       },
+      %{
+        address1: "123 test street",
+        address2: "",
+        city: "dup",
+        state: "test state",
+        zip: "98765",
+        country: "test country",
+        phone: "+1234567890",
+        opening_hours: "10:00 - 22:00 daily",
+      },
+      %{
+        address1: "123 test street",
+        address2: "",
+        city: "test city",
+        state: "test state",
+        zip: "98765",
+        country: "dup",
+        phone: "+1234567890",
+        opening_hours: "10:00 - 22:00 daily",
+      },
+      %{
+        address1: "123 test street",
+        address2: "",
+        city: "dup",
+        state: "test state",
+        zip: "98765",
+        country: "dup",
+        phone: "+1234567890",
+        opening_hours: "10:00 - 22:00 daily",
+      },
     ]
   end
 end
