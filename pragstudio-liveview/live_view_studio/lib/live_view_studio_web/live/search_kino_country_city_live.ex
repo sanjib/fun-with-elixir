@@ -18,7 +18,7 @@ defmodule LiveViewStudioWeb.SearchKinoCountryCityLive do
     <h1>Kinokuniya Stores</h1>
     <div id="search">
       <form phx-change="search">
-        <input type="text" name="search" placeholder="Type a city or country" autofocus />
+        <input type="text" name="search" placeholder="Type a city or country" autofocus autocomplete="off" />
       </form>
 
       <div class="stores">
@@ -43,8 +43,8 @@ defmodule LiveViewStudioWeb.SearchKinoCountryCityLive do
     IO.puts "--> search: #{search}"
     stores =
       if String.length(search) > 2 do
-        KinokuniyaStores.list_by_city(search)
-        |> Enum.concat(KinokuniyaStores.list_by_country(search))
+        KinokuniyaStores.list_by_city_fuzzy(search)
+        |> Enum.concat(KinokuniyaStores.list_by_country_fuzzy(search))
         |> Enum.uniq
       else
         []

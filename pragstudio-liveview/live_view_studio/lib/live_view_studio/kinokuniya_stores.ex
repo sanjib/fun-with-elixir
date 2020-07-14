@@ -5,9 +5,26 @@ defmodule LiveViewStudio.KinokuniyaStores do
     |> Enum.filter(&(&1.country == country))
   end
 
+  def list_by_country_fuzzy(country) do
+    list_all
+    |> Enum.filter(&(&1.country =~ ~r/#{country}/i))
+  end
+
   def list_by_city(city) do
     list_all
     |> Enum.filter(&(&1.city == city))
+  end
+
+  def list_by_city_fuzzy(city) do
+    list_all
+    |> Enum.filter(&(&1.city =~ ~r/#{city}/i))
+  end
+
+  def list_by_zip(zip) do
+    :timer.sleep(2000)
+
+    list_all
+    |> Enum.filter(&(&1.zip == zip))
   end
 
   def list_all() do
