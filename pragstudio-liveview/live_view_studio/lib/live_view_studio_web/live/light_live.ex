@@ -3,7 +3,10 @@ defmodule LiveViewStudioWeb.LightLive do
 
   def mount(_params, _session, socket) do
     # IO.puts "--> MOUNT #{inspect self()}"
-    socket = assign(socket, :brightness, 10)
+    socket = assign(socket,
+      brightness: 10,
+      temp_color: temp_color(3000)
+    )
     {:ok, socket}
   end
 
@@ -13,7 +16,7 @@ defmodule LiveViewStudioWeb.LightLive do
     <h1>Front Porch Light</h1>
     <div class="light">
       <div class="meter">
-        <span style="width: <%= @brightness %>%">
+        <span style="width: <%= @brightness %>%; background-color: <%= @temp_color %>;">
           <%= @brightness %>%
         </span>
       </div>
@@ -27,14 +30,20 @@ defmodule LiveViewStudioWeb.LightLive do
     <button phx-click="random">Random</button>
     <form phx-change="range_update_brightness">
       <input type="range" name="brightness" value="<%= @brightness %>" min="0" max="100" step="10" />
+
+      <label><%= radio_button(:light, :temp_color, "3000", checked: temp_color_checked?(3000, @temp_color)) %> 3000</label>
+      <label><%= radio_button(:light, :temp_color, "4000", checked: temp_color_checked?(4000, @temp_color)) %> 4000</label>
+      <label><%= radio_button(:light, :temp_color, "5000", checked: temp_color_checked?(5000, @temp_color)) %> 5000</label>
     </form>
 
     """
   end
 
-  def handle_event("range_update_brightness", %{"brightness" => brightness}, socket) do
+  def handle_event("range_update_brightness", %{"brightness" => brightness, "light" => light}, socket) do
     brightness = String.to_integer(brightness)
-    socket = assign(socket, brightness: brightness)
+    temp_color = String.to_integer(light["temp_color"]) |> temp_color()
+#    temp_color = temp_color(3000)
+    socket = assign(socket, brightness: brightness, temp_color: temp_color)
     {:noreply, socket}
   end
 
@@ -64,5 +73,15 @@ defmodule LiveViewStudioWeb.LightLive do
     socket = update(socket, :brightness, &min(100, &1 + 10))
     {:noreply, socket}
   end
+
+  #________________
+
+  defp temp_color_checked?(key, value) do
+    if temp_color(key) == value, do: true, else: false
+  end
+
+  defp temp_color(3000), do: "#F1C40D"
+  defp temp_color(4000), do: "#FEFF66"
+  defp temp_color(5000), do: "#99CCFF"
 
 end
