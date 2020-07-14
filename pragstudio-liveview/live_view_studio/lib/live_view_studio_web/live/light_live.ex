@@ -5,7 +5,7 @@ defmodule LiveViewStudioWeb.LightLive do
     # IO.puts "--> MOUNT #{inspect self()}"
     socket = assign(socket,
       brightness: 10,
-      temp_color: temp_color(3000)
+      temp: 3000
     )
     {:ok, socket}
   end
@@ -16,7 +16,7 @@ defmodule LiveViewStudioWeb.LightLive do
     <h1>Front Porch Light</h1>
     <div class="light">
       <div class="meter">
-        <span style="width: <%= @brightness %>%; background-color: <%= @temp_color %>;">
+        <span style="width: <%= @brightness %>%; background-color: <%= temp_color(@temp) %>;">
           <%= @brightness %>%
         </span>
       </div>
@@ -28,22 +28,23 @@ defmodule LiveViewStudioWeb.LightLive do
     <button phx-click="on">On</button>
     <br>
     <button phx-click="random">Random</button>
-    <form phx-change="range_update_brightness">
+    <form phx-change="update">
       <input type="range" name="brightness" value="<%= @brightness %>" min="0" max="100" step="10" />
 
-      <label><%= radio_button(:light, :temp_color, "3000", checked: temp_color_checked?(3000, @temp_color)) %> 3000</label>
-      <label><%= radio_button(:light, :temp_color, "4000", checked: temp_color_checked?(4000, @temp_color)) %> 4000</label>
-      <label><%= radio_button(:light, :temp_color, "5000", checked: temp_color_checked?(5000, @temp_color)) %> 5000</label>
+      <%= @temp %>
+      
+      <label><%= radio_button(:temp, :temp, "3000", checked: (if @temp == 3000, do: true)) %> 3000</label>
+      <label><%= radio_button(:temp, :temp, "4000", checked: (if @temp == 4000, do: true)) %> 4000</label>
+      <label><%= radio_button(:temp, :temp, "5000", checked: (if @temp == 5000, do: true)) %> 5000</label>
     </form>
 
     """
   end
 
-  def handle_event("range_update_brightness", %{"brightness" => brightness, "light" => light}, socket) do
+  def handle_event("update", %{"brightness" => brightness, "temp" => temp}, socket) do
     brightness = String.to_integer(brightness)
-    temp_color = String.to_integer(light["temp_color"]) |> temp_color()
-#    temp_color = temp_color(3000)
-    socket = assign(socket, brightness: brightness, temp_color: temp_color)
+    temp = String.to_integer(temp["temp"])
+    socket = assign(socket, brightness: brightness, temp: temp)
     {:noreply, socket}
   end
 
@@ -75,11 +76,7 @@ defmodule LiveViewStudioWeb.LightLive do
   end
 
   #________________
-
-  defp temp_color_checked?(key, value) do
-    if temp_color(key) == value, do: true, else: false
-  end
-
+  
   defp temp_color(3000), do: "#F1C40D"
   defp temp_color(4000), do: "#FEFF66"
   defp temp_color(5000), do: "#99CCFF"
