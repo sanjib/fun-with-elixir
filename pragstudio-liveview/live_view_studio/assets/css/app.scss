@@ -213,3 +213,38 @@
       transform: scale(1.0);
     }
 }
+
+
+/* flights */
+
+.flights {
+}
+.flights ul {
+  list-style: none;
+}
+.flights li {
+  border-radius: 5px;
+  background-color: aliceblue;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.flights .first-line,
+.flights .second-line
+{
+  display: table;
+  width: 100%;
+}
+
+.flights .number,
+.flights .origin-destination,
+.flights .departs,
+.flights .arrives
+{
+  display: table-cell;
+  width: 50%;
+}
+.flights .number {
+  font-weight: bold;
+}
+
+.flights img { width: 16px; }

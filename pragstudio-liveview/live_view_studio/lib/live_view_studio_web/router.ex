@@ -23,6 +23,7 @@ defmodule LiveViewStudioWeb.Router do
     live "/sales-dashboard", SalesDashboardLive
     live "/search-kino-country-city", SearchKinoCountryCityLive
     live "/search", SearchLive
+    live "/flights", FlightsLive
 
     get "/sales", SalesController, :index
   end
