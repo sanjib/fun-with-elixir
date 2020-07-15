@@ -217,6 +217,12 @@
 
 /* flights */
 
+.search_flights_form { display: flex; }
+.search_flights_form form { display: flex; flex: 50% 0 0; }
+.search_flights_form form:nth-child(1) { padding-right: 10px; }
+.search_flights_form form:nth-child(2) { padding-left: 10px; }
+.search_flights_form input[type="text"] { margin-right: 5px; }
+
 .flights {
 }
 .flights ul {

@@ -2,10 +2,13 @@ defmodule LiveViewStudioWeb.FlightsLive do
   use LiveViewStudioWeb, :live_view
 
   alias LiveViewStudio.Flights
+  alias LiveViewStudio.Airports
 
   def mount(_params, _session, socket) do
     socket = assign(socket,
       loading: false,
+      airport_code: "",
+      airport_matches: [],
       flight_number: "",
       flights: []
     )
@@ -39,19 +42,70 @@ defmodule LiveViewStudioWeb.FlightsLive do
     {:noreply, socket}
   end
 
+  def handle_info({:search_airports, airport_code}, socket) do
+    case LiveViewStudio.Flights.search_by_airport(airport_code) do
+      [] ->
+        socket =
+          socket
+          |> put_flash(:info, "Sorry flight with airport code \"#{airport_code}\" found")
+          |> assign(loading: false, flights: [])
+        {:noreply, socket}
+      flights ->
+        socket =
+          socket
+          |> assign(loading: false, flights: flights)
+        {:noreply, socket}
+    end
+  end
+
+
+  def handle_event("search_airports", %{"airport_code" => airport_code}, socket) do
+    send self(), {:search_airports, airport_code}
+    socket =
+      socket
+      |> clear_flash
+      |> assign(loading: true, airport_code: airport_code, flights: [])
+    {:noreply, socket}
+  end
+
+  def handle_event("suggest_airports", %{"airport_code" => airport_code}, socket) do
+    socket =
+      socket
+      |> assign(airport_matches: LiveViewStudio.Airports.suggest(airport_code))
+    {:noreply, socket}
+  end
+
   def render(assigns) do
     ~L"""
     <h1>Find a Flight</h1>
-    <div id="search">
+    <div id="search_flights">
 
-    <form phx-submit="search_flights">
-      <input type="text" name="flight_number"
-        value="<%= @flight_number %>"
-        placeholder="Flight Number"
-        <%= if @loading, do: "readonly" %>
-        autofocus autocomplete="off" />
-      <button type="submit">Search</button>
-    </form>
+      <div class="search_flights_form">
+        <form phx-submit="search_flights">
+          <input type="text" name="flight_number"
+            value="<%= @flight_number %>"
+            placeholder="Flight Number"
+            <%= if @loading, do: "readonly" %>
+            autofocus autocomplete="off" />
+          <button type="submit">Go</button>
+        </form>
+
+        <form phx-submit="search_airports" phx-change="suggest_airports">
+          <input type="text" name="airport_code"
+            value="<%= @airport_code %>"
+            list="airport_matches"
+            placeholder="Airport Code"
+            <%= if @loading, do: "readonly" %>
+            phx-debounce="500"
+            autocomplete="off" />
+          <button type="submit">Go</button>
+        </form>
+        <datalist id="airport_matches">
+          <%= for airport <- @airport_matches do %>
+            <option value="<%= airport %>"><%= airport %></option>
+          <% end %>
+        </datalist>
+      </div>
 
       <%= if @loading do %>
         <div class="loader">
