@@ -11,6 +11,8 @@ defmodule LiveViewStudio.KinokuniyaStores do
   end
 
   def list_by_city(city) do
+    :timer.sleep(2000)
+
     list_all
     |> Enum.filter(&(&1.city == city))
   end
