@@ -32,16 +32,6 @@ defmodule LiveViewStudioWeb.FlightsLive do
     end
   end
 
-  def handle_event("search_flights", %{"flight_number" => flight_number}, socket) do
-    send self(), {:search_flights, flight_number}
-
-    socket =
-      socket
-      |> clear_flash
-      |> assign(loading: true, flight_number: flight_number, flights: [])
-    {:noreply, socket}
-  end
-
   def handle_info({:search_airports, airport_code}, socket) do
     case LiveViewStudio.Flights.search_by_airport(airport_code) do
       [] ->
@@ -58,6 +48,15 @@ defmodule LiveViewStudioWeb.FlightsLive do
     end
   end
 
+  def handle_event("search_flights", %{"flight_number" => flight_number}, socket) do
+    send self(), {:search_flights, flight_number}
+
+    socket =
+      socket
+      |> clear_flash
+      |> assign(loading: true, flight_number: flight_number, flights: [])
+    {:noreply, socket}
+  end
 
   def handle_event("search_airports", %{"airport_code" => airport_code}, socket) do
     send self(), {:search_airports, airport_code}
@@ -71,7 +70,7 @@ defmodule LiveViewStudioWeb.FlightsLive do
   def handle_event("suggest_airports", %{"airport_code" => airport_code}, socket) do
     socket =
       socket
-      |> assign(airport_matches: LiveViewStudio.Airports.suggest(airport_code))
+      |> assign(airport_matches: Airports.suggest(airport_code))
     {:noreply, socket}
   end
 

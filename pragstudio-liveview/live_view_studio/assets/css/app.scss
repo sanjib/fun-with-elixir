@@ -287,3 +287,37 @@
   padding-right: 10px;
 }
 
+/* /filter */
+
+#filter form {
+  margin-bottom: 0;
+}
+.boats {
+  display: flex;
+  flex-wrap: wrap;
+}
+.boats .card {
+  background: aliceblue;
+  border-radius: 5px;
+  margin: 0 20px 20px 0;
+}
+.boats img {
+  border-radius: 5px 5px 0 0;
+}
+.boats .model {
+  font-weight: bold;
+}
+.boats .content {
+  padding: 3px 15px 12px 15px;
+}
+.boats .price {
+  font-weight: bold;
+  color: green;
+}
+.boats .type {
+  background: steelblue;
+  color: aliceblue;
+  font-size: 0.75em;
+  border-radius: 5px;
+  padding: 1px 5px;
+}

@@ -2,7 +2,7 @@ defmodule LiveViewStudio.CitiesKinokuniyaStores do
   def suggest(""), do: []
 
   def suggest(city) do
-    list_cities
+    list_cities()
     |> Enum.filter(&(&1 =~ ~r/#{city}/i))
   end
 

@@ -4,7 +4,6 @@ defmodule LiveViewStudioWeb.LicenseLive do
   alias LiveViewStudio.Licenses
 
   import Number.Currency
-  import Inflex
 
   def mount(_params, _session, socket) do
     expiration_time = Timex.shift(Timex.now(), hours: 1)
