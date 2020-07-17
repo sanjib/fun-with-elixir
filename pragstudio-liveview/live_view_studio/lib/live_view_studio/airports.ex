@@ -9,9 +9,11 @@ defmodule LiveViewStudio.Airports do
 
   def list do
     [
+      "CPH",
       "DAB",
       "DEN",
       "DFW",
+      "LHR",
       "ORD",
     ]
   end

@@ -12,7 +12,7 @@ defmodule LiveViewStudioWeb.AutocompleteLive do
       stores: [],
       loading: false
     )
-    {:ok, socket}
+    {:ok, socket, temporary_assigns: [stores: []]}
   end
 
   def handle_info({:run_zip_search, zip}, socket) do

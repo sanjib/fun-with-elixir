@@ -12,7 +12,7 @@ defmodule LiveViewStudioWeb.FlightsLive do
       flight_number: "",
       flights: []
     )
-    {:ok, socket}
+    {:ok, socket, temporary_assigns: [flights: []]}
   end
 
   def handle_info({:search_flights, flight_number}, socket) do
@@ -37,7 +37,7 @@ defmodule LiveViewStudioWeb.FlightsLive do
       [] ->
         socket =
           socket
-          |> put_flash(:info, "Sorry flight with airport code \"#{airport_code}\" found")
+          |> put_flash(:info, "Sorry flight with airport code \"#{airport_code}\" not found")
           |> assign(loading: false, flights: [])
         {:noreply, socket}
       flights ->
