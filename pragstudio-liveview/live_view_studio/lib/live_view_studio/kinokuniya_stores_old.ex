@@ -1,4 +1,4 @@
-defmodule LiveViewStudio.KinokuniyaStores do
+defmodule LiveViewStudio.KinokuniyaStoresOld do
 
   def list_by_country(country) do
     list_all()

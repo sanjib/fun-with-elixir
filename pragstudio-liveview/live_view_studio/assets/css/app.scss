@@ -290,25 +290,50 @@
 /* /filter */
 
 #filter form {
+  margin-bottom: 1em;
+}
+.filters {
+  display: flex;
+  align-items: center;
+}
+.filters select,
+.filters input
+{ margin: 0; }
+
+.filters select {
+  height: inherit;
+}
+
+.filters .prices {
+  margin-left: 30px;
+  display: flex;
+}
+.filters .prices label {
+  margin-right: 20px;
   margin-bottom: 0;
+}
+.filters .clear {
+  margin-left: 10px;
 }
 .boats {
   display: flex;
   flex-wrap: wrap;
+  margin: -10px;
 }
 .boats .card {
-  background: aliceblue;
-  border-radius: 5px;
-  margin: 0 20px 20px 0;
+  flex: 33.33% 0 0;
+  padding: 10px;
 }
 .boats img {
   border-radius: 5px 5px 0 0;
+  margin-bottom: -10px;
 }
 .boats .model {
   font-weight: bold;
 }
 .boats .content {
-  padding: 3px 15px 12px 15px;
+  background: aliceblue;
+  padding: 5px 10px 12px 10px;
 }
 .boats .price {
   font-weight: bold;
