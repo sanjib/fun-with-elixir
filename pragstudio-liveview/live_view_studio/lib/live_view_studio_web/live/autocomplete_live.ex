@@ -16,7 +16,7 @@ defmodule LiveViewStudioWeb.AutocompleteLive do
   end
 
   def handle_info({:run_zip_search, zip}, socket) do
-    case KinokuniyaStores.list_by_zip(zip) do
+    case KinokuniyaStores.search_by_zip(zip) do
       [] ->
         socket =
           socket
@@ -31,7 +31,7 @@ defmodule LiveViewStudioWeb.AutocompleteLive do
   end
 
   def handle_info({:run_city_search, city}, socket) do
-    case LiveViewStudio.KinokuniyaStores.list_by_city(city) do
+    case KinokuniyaStores.search_by_city(city) do
       [] ->
         socket =
           socket
