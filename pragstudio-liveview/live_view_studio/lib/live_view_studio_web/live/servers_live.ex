@@ -29,6 +29,15 @@ defmodule LiveViewStudioWeb.ServersLive do
     {:noreply, socket}
   end
 
+  def handle_params(%{"name" => name}, _url, socket) do
+    server = Servers.get_server_by_name(name)
+    socket = assign(socket,
+      page_title: server.name,
+      selected_server: server,
+    )
+    {:noreply, socket}
+  end
+
   def handle_params(_params, _url, socket) do
     {:noreply, socket}
   end
@@ -57,7 +66,7 @@ defmodule LiveViewStudioWeb.ServersLive do
           <%= for server <- @servers do %>
             <div>
               <%= live_patch link_body(server),
-                    to: Routes.live_path(@socket, __MODULE__, id: server.id),
+                    to: Routes.live_path(@socket, __MODULE__, name: server.name),
                     class: (if server == @selected_server, do: "active"),
                     replace: true #change the URL without polluting the browser's history
               %>
