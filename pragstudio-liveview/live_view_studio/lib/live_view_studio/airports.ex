@@ -9,6 +9,7 @@ defmodule LiveViewStudio.Airports do
 
   def list do
     [
+      "BKK",
       "CPH",
       "DAB",
       "DEN",
@@ -18,3 +19,4 @@ defmodule LiveViewStudio.Airports do
     ]
   end
 end
+

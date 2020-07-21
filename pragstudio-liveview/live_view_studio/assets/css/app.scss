@@ -1,6 +1,7 @@
 /* This file is for your main application css. */
 @import "./phoenix.css";
 @import "../node_modules/nprogress/nprogress.css";
+//@import "./custom.css";
 
 /* LiveView specific classes for your customizations */
 .invalid-feedback {
@@ -345,4 +346,49 @@
   font-size: 0.75em;
   border-radius: 5px;
   padding: 1px 5px;
+}
+
+/* /servers */
+#servers {
+  display: flex;
+  flex-wrap: wrap;
+}
+#servers nav a {
+  display: block;
+  padding: 0 5px;
+}
+#servers nav .active {
+  background: gainsboro;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+#servers .sidebar {
+  padding: 15px 15px 0 14px;
+  background-color: whitesmoke;
+}
+#servers img {
+  width: 20px;
+}
+#servers .main {
+  padding: 15px;
+}
+#servers .row {
+  padding-left: 15px;
+  margin-bottom: 15px;
+}
+#servers .header span {
+  border-radius: 5px;
+  padding: 5px;
+}
+#servers .up {
+  background-color: lightgreen;
+}
+#servers .down {
+  background-color: lightcoral;
+}
+#servers h2 {
+  margin-bottom: 10px;
+}
+#servers .header {
+  margin-bottom: 20px;
 }
