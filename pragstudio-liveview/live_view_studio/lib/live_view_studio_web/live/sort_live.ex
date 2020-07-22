@@ -18,7 +18,7 @@ defmodule LiveViewStudioWeb.SortLive do
   ### EVENTS ###
 
   def handle_params(params, _url, socket) do
-    IO.puts "--> handle_params:params: #{inspect params}"
+    #IO.puts "--> handle_params:params: #{inspect params}"
 
     # PAGINATION FROM PARAMS
     page = String.to_integer(params["page"] || "#{@default_page}")
@@ -44,7 +44,7 @@ defmodule LiveViewStudioWeb.SortLive do
   end
 
   def handle_event("update_per_page", %{"per_page" => per_page}, socket) do
-    IO.puts "--> update_per_page:per_page: #{inspect per_page}"
+    #IO.puts "--> update_per_page:per_page: #{inspect per_page}"
     per_page = String.to_integer(per_page)
 
     # Always send back to page 1 after changing per_page

@@ -1,8 +1,16 @@
 <h1>Vehicles</h1>
 
 <form phx-change="update_per_page" style="margin: 0;">
+  Records per page:
   <select name="per_page">
     <%= options_for_select(@per_page_options, @options.per_page) %>
+  </select>
+</form>
+
+<form phx-change="sort" style="margin: 0;">
+  Sort order:
+  <select name="sort">
+    <%= options_for_select(@sort_options, @sort_select) %>
   </select>
 </form>
 
@@ -59,7 +67,7 @@ v_chunks = Enum.chunk_every(@vehicles, chunk_size)
 </section>
 
 <div class="vehicles-pagination">
-<%= paginate(@socket, @options.page, @options.per_page, @total_vehicles) %>
+<%= paginate(@socket, @total_vehicles, @options) %>
 </div>
 
 <br/>
