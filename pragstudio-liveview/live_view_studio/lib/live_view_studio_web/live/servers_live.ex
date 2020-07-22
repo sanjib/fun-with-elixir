@@ -24,7 +24,7 @@ defmodule LiveViewStudioWeb.ServersLive do
     server = Servers.get_server!(id)
     socket = assign(socket,
       page_title: server.name,
-      selected_server: server,
+      selected_server: server
     )
     {:noreply, socket}
   end
@@ -33,7 +33,7 @@ defmodule LiveViewStudioWeb.ServersLive do
     server = Servers.get_server_by_name(name)
     socket = assign(socket,
       page_title: server.name,
-      selected_server: server,
+      selected_server: server
     )
     {:noreply, socket}
   end
