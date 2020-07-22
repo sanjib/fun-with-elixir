@@ -395,3 +395,37 @@
 
 /* / (home) */
 .home li { margin: 0; line-height: 1.3em; }
+
+#donations .eat-now {
+  background: lightpink;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+#donations .fresh {
+  background: lightgreen;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+#donations .pagination {
+  display: table;
+  border-radius: 5px;
+  background: whitesmoke;
+}
+
+#donations .pagination span a,
+#donations .pagination .current_page {
+  display: table-cell;
+  border-left: 1px solid gainsboro;
+  padding: 5px 10px;
+}
+
+#donations .pagination span:nth-child(1) a,
+#donations .pagination .current_page:nth-child(1) {
+  border-left: 0;
+}
+
+#donations .pagination .current_page {
+  font-weight: bold;
+}
