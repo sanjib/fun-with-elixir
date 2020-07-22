@@ -52,6 +52,7 @@ defmodule LiveViewStudio.MixProject do
       {:number, "~> 1.0"},
       { :inflex, "~> 2.0.0" },
       {:timex, "~> 3.0"},
+      {:faker, "~> 0.14.0"},
     ]
   end
 

@@ -16,6 +16,7 @@ alias LiveViewStudio.KinokuniyaStores.KinokuniyaStore
 alias LiveViewStudio.Flights.Flight
 alias LiveViewStudio.Servers.Server
 alias LiveViewStudio.Donations.Donation
+alias LiveViewStudio.Vehicles.Vehicle
 
 %Boat{
   model: "1760 Retriever Jon Deluxe",
@@ -546,6 +547,15 @@ for _i <- 1..100 do
     item: item,
     quantity: Enum.random(1..20),
     days_until_expires: Enum.random(1..30)
+  }
+  |> Repo.insert!()
+end
+
+for _i <- 1..1000 do
+  %Vehicle{
+    make: Faker.Vehicle.make(),
+    model: Faker.Vehicle.model(),
+    color: Faker.Color.name()
   }
   |> Repo.insert!()
 end

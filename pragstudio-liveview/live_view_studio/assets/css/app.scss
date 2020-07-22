@@ -429,3 +429,34 @@
 #donations .pagination .current_page {
   font-weight: bold;
 }
+
+/* /vehicles */
+
+.vehicles {
+  margin-bottom: 30px;
+}
+.vehicles td {
+  padding: 0;
+}
+.vehicles-pagination {
+  display: table;
+  border-radius: 5px;
+  background: whitesmoke;
+  margin: auto;
+}
+.vehicles-pagination span,
+.vehicles-pagination a
+{
+  display: table-cell;
+  border-left: 1px solid gainsboro;
+  padding: 5px 10px;
+}
+
+.vehicles-pagination a:nth-child(1),
+.vehicles-pagination .current_page:nth-child(1) {
+  border-left: 0;
+}
+
+.vehicles-pagination .current_page {
+  font-weight: bold;
+}

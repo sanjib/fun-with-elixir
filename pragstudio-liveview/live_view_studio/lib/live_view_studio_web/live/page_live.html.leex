@@ -17,6 +17,7 @@
       <li><%= live_redirect "Filter Boats", to: Routes.live_path(@socket, LiveViewStudioWeb.FilterLive) %></li>
       <li><%= live_redirect "Servers with Custom URL", to: Routes.live_path(@socket, LiveViewStudioWeb.ServersLive) %></li>
       <li><%= live_redirect "Donations with Pagination", to: Routes.live_path(@socket, LiveViewStudioWeb.PaginateLive) %></li>
+      <li><%= live_redirect "Vehicles with Pagination", to: Routes.live_path(@socket, LiveViewStudioWeb.VehicleLive) %></li>
     </ul>
     <ul>
       <li><%= link "Combined Live Views", to: Routes.sales_path(@socket, :index), target: "_blank" %></li>

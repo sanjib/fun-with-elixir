@@ -1,0 +1,65 @@
+<h1>Vehicles</h1>
+
+<form phx-change="update_per_page" style="margin: 0;">
+  <select name="per_page">
+    <%= options_for_select(@per_page_options, @options.per_page) %>
+  </select>
+</form>
+
+<%
+chunk_size = length(@vehicles)/2 |> ceil
+v_chunks = Enum.chunk_every(@vehicles, chunk_size)
+%>
+
+<section class="row">
+  <article class="column">
+    <table class="vehicles">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for v <- hd(v_chunks) do %>
+        <tr>
+          <td><%= v.id %></td>
+          <td><%= v.make %></td>
+          <td><%= v.model %></td>
+          <td><%= v.color %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  </article>
+  <article class="column">
+    <table class="vehicles">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for v <- hd tl(v_chunks) do %>
+            <tr>
+              <td><%= v.id %></td>
+              <td><%= v.make %></td>
+              <td><%= v.model %></td>
+              <td><%= v.color %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        </table>
+  </article>
+</section>
+
+<div class="vehicles-pagination">
+<%= paginate(@socket, @options.page, @options.per_page, @total_vehicles) %>
+</div>
+
+<br/>

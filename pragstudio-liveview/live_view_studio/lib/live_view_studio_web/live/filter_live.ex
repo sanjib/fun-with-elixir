@@ -36,14 +36,14 @@ defmodule LiveViewStudioWeb.FilterLive do
   end
 
   defp assign_defaults(socket) do
-    socket =
-      socket
-      |> assign(
-           boats: Boats.list_boats(),
-           type: "",
-           prices: %{}
-         )
+    socket
+    |> assign(
+         boats: Boats.list_boats(),
+         type: "",
+         prices: %{}
+       )
   end
+
   defp list_boats_from_query(type, []), do: Boats.list_boats(type: type)
   defp list_boats_from_query(type, prices), do: Boats.list_boats(type: type, prices: prices)
 
