@@ -460,3 +460,42 @@
 .vehicles-pagination .current_page {
   font-weight: bold;
 }
+
+/* /volunteers */
+
+.volunteer {
+  display: flex;
+  flex: 100% 0 0;
+  background: aliceblue;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+#checkin form {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#checkin form .name,
+#checkin form .phone,
+#checkin form .submit {
+  width: 33.33%;
+}
+
+#checkin form .name,
+#checkin form .phone {
+  padding-right: 15px;
+}
+#checkin form .submit {
+  padding-left: 15px;
+}
+
+.volunteer .name,
+.volunteer .phone,
+.volunteer .status {
+  width: 33.33%;
+  padding: 15px;
+}
+.volunteer button {
+  margin: 0;
+}

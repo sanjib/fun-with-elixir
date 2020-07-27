@@ -30,6 +30,7 @@ defmodule LiveViewStudioWeb.Router do
     live "/paginate", PaginateLive
     live "/vehicles", VehicleLive
     live "/sort", SortLive
+    live "volunteers", VolunteersLive
 
     get "/sales", SalesController, :index
   end
