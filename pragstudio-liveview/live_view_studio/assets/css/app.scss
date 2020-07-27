@@ -365,12 +365,21 @@
 #servers .sidebar {
   padding: 15px 15px 0 14px;
   background-color: whitesmoke;
+  width: 25%;
 }
+#servers .sidebar .status {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 #servers img {
   width: 20px;
 }
 #servers .main {
   padding: 15px;
+  width: 75%;
 }
 #servers .row {
   padding-left: 15px;
@@ -391,6 +400,9 @@
 }
 #servers .header {
   margin-bottom: 20px;
+}
+#servers .cancel {
+  margin-left: 12px;
 }
 
 /* / (home) */

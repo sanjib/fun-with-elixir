@@ -22,9 +22,6 @@ defmodule LiveViewStudioWeb.VolunteersLive do
         changeset = Volunteers.change_volunteer(%Volunteer{})
         socket = assign(socket, changeset: changeset)
 
-        :timer.sleep(1000)
-        IO.puts "--> did work!!"
-
         {:noreply, socket}
       {:error, %Ecto.Changeset{} = changeset} ->
         socket = assign(socket, changeset: changeset)
