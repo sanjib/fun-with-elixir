@@ -77,6 +77,21 @@ defmodule LiveViewStudioWeb.ServersLive do
         {:noreply, socket}
     end
   end
+
+  def handle_event("change", %{"server" => params}, socket) do
+    IO.puts "--> params: #{inspect params}"
+
+    #1 changeset
+    changeset =
+      %Server{}
+      |> Servers.change_server(params)
+      |> Map.put(:action, :insert)
+
+    #2
+    socket = assign(socket, changeset: changeset)
+
+    {:noreply, socket}
+  end
   
   ### LIVE PATH /servers/new ###
 

@@ -25,13 +25,13 @@
             <h2>Add Server</h2>
           </div>
           <div class="add-server">
-          <%= form_for @changeset, "#", [phx_submit: "save"], fn f -> %>
+          <%= form_for @changeset, "#", [phx_submit: "save", phx_change: "change"], fn f -> %>
             Name:
-            <%= text_input f, :name, placeholder: "Name" %>
+            <%= text_input f, :name, placeholder: "Name", phx_debounce: 1000 %>
             <%= error_tag f, :name %>
 
             Framework:
-            <%= text_input f, :framework, placeholder: "Framework" %>
+            <%= text_input f, :framework, placeholder: "Framework", phx_debounce: 1000 %>
             <%= error_tag f, :framework %>
 
             Size:
@@ -39,7 +39,7 @@
             <%= error_tag f, :size %>
 
             Git Repo:
-            <%= text_input f, :git_repo, placeholder: "Git Repo" %>
+            <%= text_input f, :git_repo, placeholder: "Git Repo", phx_debounce: "blur" %>
             <%= error_tag f, :git_repo %>
 
             <%= submit "Save" %>
