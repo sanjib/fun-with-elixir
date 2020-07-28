@@ -21,7 +21,6 @@ defmodule LiveViewStudioWeb.VolunteersLive do
         socket = update(socket, :volunteers, fn volunteers -> [volunteer | volunteers] end)
         changeset = Volunteers.change_volunteer(%Volunteer{})
         socket = assign(socket, changeset: changeset)
-
         {:noreply, socket}
       {:error, %Ecto.Changeset{} = changeset} ->
         socket = assign(socket, changeset: changeset)
@@ -30,15 +29,23 @@ defmodule LiveViewStudioWeb.VolunteersLive do
   end
 
   def handle_event("validate", %{"volunteer" => params}, socket) do
-    IO.puts "--> validate: #{inspect params}"
-
     changeset =
       %Volunteer{}
       |> Volunteers.change_volunteer(params)
       |> Map.put(:action, :insert)
-
     socket = assign(socket, changeset: changeset)
+    {:noreply, socket}
+  end
 
+  def handle_event("toggle_status", %{"id" => id}, socket) do
+#    id = String.to_integer(id)
+    volunteer = Volunteers.get_volunteer!(id) # id is string
+    {:ok, _volunteer} = Volunteers.toggle_checked_out(volunteer)
+
+    socket = assign(socket,
+      volunteers: Volunteers.list_volunteers()
+    )
+    :timer.sleep(1000)
     {:noreply, socket}
   end
 

@@ -73,6 +73,10 @@ defmodule LiveViewStudio.Volunteers do
     |> Repo.update()
   end
 
+  def toggle_checked_out(%Volunteer{} = volunteer) do
+    update_volunteer(volunteer, %{checked_out: !volunteer.checked_out})
+  end
+
   @doc """
   Deletes a volunteer.
 

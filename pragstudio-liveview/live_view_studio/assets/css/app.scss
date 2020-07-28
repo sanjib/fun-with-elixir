@@ -511,3 +511,15 @@
 .volunteer button {
   margin: 0;
 }
+
+.volunteer .status {
+  display: flex;
+}
+.volunteer .status img {
+  width: 20px;
+  margin-right: 5px;
+}
+.volunteer .checked_in {
+  background: lightgreen;
+  border-color: limegreen;
+}
