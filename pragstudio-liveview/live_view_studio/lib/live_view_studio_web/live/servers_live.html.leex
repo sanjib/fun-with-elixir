@@ -49,7 +49,9 @@
         <% else %>
           <div class="header">
             <h2><%= @selected_server.name %></h2>
-            <span class="<%= @selected_server.status %>">
+            <span class="status <%= @selected_server.status %>"
+              phx-click="toggle_status"
+              phx-value-id="<%= @selected_server.id %>">
               <%= @selected_server.status %>
             </span>
           </div>
