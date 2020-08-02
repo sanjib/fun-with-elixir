@@ -225,6 +225,10 @@ Repo.insert! %Artist{
   ]
 }
 
+Repo.insert! %Artist{
+  name: "Bruce Springsteen",
+}
+
 if Repo.using_postgres?() do
   Repo.insert! %AlbumWithEmbeds{
     title: "Moanin'",

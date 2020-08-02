@@ -24,3 +24,5 @@ music_db-*.tar
 
 # Emacs
 *~
+.\#*
+\#*\#
