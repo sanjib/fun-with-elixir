@@ -4,7 +4,7 @@ use Mix.Config
 config :rumbl, Rumbl.Repo,
   username: "postgres",
   password: "postgres",
-  database: "rumbl_dev",
+  database: "fun_with_elixir_rumbl_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
