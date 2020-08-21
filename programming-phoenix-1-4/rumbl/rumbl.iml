@@ -80,5 +80,7 @@
     <orderEntry type="library" name="html_entities" level="project" />
     <orderEntry type="library" name="cowlib" level="project" />
     <orderEntry type="library" name="ranch" level="project" />
+    <orderEntry type="library" name="pbkdf2_elixir" level="project" />
+    <orderEntry type="library" name="comeonin" level="project" />
   </component>
 </module>
