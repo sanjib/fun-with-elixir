@@ -1,23 +1,8 @@
 # Rumbl
 
-To start your Phoenix server:
-
-  * Setup the project with `mix setup`
-  * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
-
 ## Notes
+
+- [mix tasks](./mix.md)
 
 - iex in context of mix script (access to modules): 
 <pre>
@@ -31,12 +16,11 @@ iex > r Accounts
 iex > recompile()
 </pre>
 
-- create migration script:
-<pre>
-mix ecto.gen.migration create_users
-</pre>
-
-- migrate:
-<pre>
-mix ecto.migrate
-</pre>
+- add video by hand, test context
+```iex
+{:ok, video} = Rumbl.Multimedia.create_video %{
+    title: "1965 Francis Bacon - Lost Interview With Francis Bacon",
+    url: "https://www.youtube.com/watch?v=GbYstSBSB_U",
+    description: "Francis Bacon at the BBC | The artist discusses his paintings and influences"
+}
+```
